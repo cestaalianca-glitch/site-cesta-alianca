@@ -1,0 +1,96 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Monte sua Cesta - Cesta Básica Aliança</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@600;700;800&family=Inter:wght@400;500;600&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="estilo.css">
+</head>
+<body>
+
+  <header class="header">
+    <div class="container header-inner">
+      <a class="logo" href="index.html">
+        <img src="imagens/logo.jpg" alt="Cesta Básica Aliança" onerror="this.style.display='none'">
+        <span class="logo-texto">Cesta Básica Aliança</span>
+      </a>
+      <button type="button" class="nav-toggle" id="nav-toggle" aria-label="Abrir menu" aria-expanded="false">
+        <span></span><span></span><span></span>
+      </button>
+      <nav class="nav" id="nav-principal">
+        <a href="index.html#sobre">Sobre</a>
+        <a href="index.html#cestas">Cestas</a>
+        <a href="montar-cesta.html">Monte a Sua</a>
+        <a href="index.html#contato">Contato</a>
+        <a class="btn btn-whatsapp nav-cta-mobile" href="https://wa.me/5543999937211" target="_blank" rel="noopener">Fale no WhatsApp</a>
+      </nav>
+      <a class="btn btn-whatsapp nav-cta" href="https://wa.me/5543999937211" target="_blank" rel="noopener">Fale no WhatsApp</a>
+    </div>
+  </header>
+
+  <section class="secao secao-montador">
+    <div class="container">
+      <h1>Monte a Sua Cesta</h1>
+      <p class="montador-intro">
+        Escolha um ponto de partida: comece do zero ou personalize uma das nossas cestas prontas,
+        trocando itens como preferir. Os valores finais são sempre confirmados com nosso atendente
+        pelo WhatsApp — aqui você só organiza o que quer levar.
+      </p>
+
+      <div class="montador-opcoes">
+        <button type="button" id="btn-modo-zero" class="btn btn-secundario">Montar do Zero</button>
+        <button type="button" id="btn-modo-padrao" class="btn btn-secundario">Personalizar Cesta Padrão</button>
+        <button type="button" id="btn-modo-grande" class="btn btn-secundario">Personalizar Cesta Grande</button>
+      </div>
+
+      <div class="montador-layout">
+        <div class="montador-catalogo" id="catalogo-itens">
+          <!-- gerado via JavaScript -->
+        </div>
+
+        <aside class="montador-resumo">
+          <h2>Sua Cesta</h2>
+          <ul id="resumo-lista" class="resumo-lista"></ul>
+          <p class="resumo-pontos-linha">Pontuação total: <strong id="resumo-pontos">0</strong></p>
+          <p id="resumo-comparativo" class="resumo-comparativo"></p>
+          <p class="resumo-aviso">
+            * A pontuação é apenas uma referência interna para equilibrar trocas.
+            O valor final da cesta é sempre combinado com nosso atendente.
+          </p>
+          <div class="resumo-botoes">
+            <button type="button" id="btn-limpar" class="btn btn-secundario">Limpar</button>
+            <button type="button" id="btn-enviar-whatsapp" class="btn btn-whatsapp">Enviar Pedido pelo WhatsApp</button>
+          </div>
+        </aside>
+      </div>
+    </div>
+  </section>
+
+  <footer class="footer">
+    <div class="container">
+      <p>&copy; <span id="ano"></span> Cesta Básica Aliança. Desde 2004.</p>
+    </div>
+  </footer>
+
+  <div id="modal-gate-cadastro" class="modal-veu" hidden>
+    <div class="modal-caixa" role="dialog" aria-modal="true" aria-labelledby="modal-gate-titulo">
+      <h2 id="modal-gate-titulo">Você já tem cadastro com a gente?</h2>
+      <p>Fazemos um cadastro de todos os clientes na primeira compra. Se ainda não se cadastrou, vamos te levar pra fazer isso primeiro — é rápido.</p>
+      <div class="modal-gate-botoes">
+        <button type="button" id="btn-gate-sim" class="btn btn-primario">Sim, já sou cliente</button>
+        <button type="button" id="btn-gate-nao" class="btn btn-secundario">Ainda não, quero me cadastrar</button>
+      </div>
+    </div>
+  </div>
+
+  <script src="menu.js"></script>
+  <script src="dados-itens.js"></script>
+  <script src="simulador.js"></script>
+  <script>
+    document.getElementById('ano').textContent = new Date().getFullYear();
+  </script>
+</body>
+</html>
