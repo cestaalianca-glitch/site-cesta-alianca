@@ -138,6 +138,10 @@
               <label class="opcao-radio"><input type="radio" name="vinculo" value="autonomo"><span>Autônomo(a)</span></label>
             </div>
           </div>
+          <div class="campo" id="campo-registro" hidden>
+            <label for="registroMeses">Há quantos meses você está nesse emprego (carteira assinada)? <span class="obrigatorio">*</span></label>
+            <input type="number" id="registroMeses" name="registroMeses" min="0" max="600" step="1" inputmode="numeric" placeholder="Ex.: 18">
+          </div>
           <div class="campo">
             <label for="profissao">Profissão <span class="obrigatorio">*</span></label>
             <input type="text" id="profissao" name="profissao" maxlength="60" placeholder="Ex.: aposentada, auxiliar de limpeza, pedreiro" required>
@@ -213,6 +217,7 @@
   </footer>
 
   <script src="config-site.js"></script>
+  <script src="origem.js"></script>
   <script src="menu.js"></script>
   <script src="cadastro-rapido.js"></script>
   <script>document.getElementById('ano').textContent = new Date().getFullYear();</script>

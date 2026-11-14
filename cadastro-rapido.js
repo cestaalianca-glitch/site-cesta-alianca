@@ -33,6 +33,7 @@ function novoId() {
   return "lead-" + Date.now().toString(36) + "-" + Math.random().toString(36).slice(2, 10);
 }
 const LEAD_ID = novoId();
+function origemTrafego() { try { return typeof window.aliancaOrigem === "function" ? window.aliancaOrigem() : {}; } catch (e) { return {}; } }
 const digitos = (v) => String(v || "").replace(/\D/g, "");
 function validarCPF(cpf) {
   const d = digitos(cpf);
@@ -150,7 +151,7 @@ document.addEventListener("DOMContentLoaded", () => {
   form.cidade.addEventListener("input", avisoRegiao);
 
   function corpoEtapa1() {
-    return { etapa: 1, leadId: LEAD_ID, nome: form.nome.value.trim(), whatsapp: digitos(form.whatsapp.value), cep: digitos(form.cep.value), rua: form.rua.value.trim(), bairro: form.bairro.value.trim(), cidade: form.cidade.value.trim(), uf: form.uf.value || "PR", ref: REF, origem: "site" };
+    return { etapa: 1, leadId: LEAD_ID, nome: form.nome.value.trim(), whatsapp: digitos(form.whatsapp.value), cep: digitos(form.cep.value), rua: form.rua.value.trim(), bairro: form.bairro.value.trim(), cidade: form.cidade.value.trim(), uf: form.uf.value || "PR", ref: REF, origem: "site", ...origemTrafego() };
   }
   /* salva o lead parcial assim que a etapa 1 estiver completa (mesmo que a pessoa não clique em Continuar) */
   let parcialEnviado = false;
@@ -188,6 +189,7 @@ document.addEventListener("DOMContentLoaded", () => {
     const n = parseInt(form.filhos.value, 10) || 0; el("campo-gasto-filhos").hidden = n <= 0; form.gastoFilhos.required = n > 0; if (n <= 0) form.gastoFilhos.value = "";
   });
   form.querySelectorAll('input[name="vinculo"]').forEach((r) => r.addEventListener("change", () => {
+    el("campo-registro").hidden = form.vinculo.value !== "clt"; form.registroMeses.required = form.vinculo.value === "clt"; if (form.vinculo.value !== "clt") form.registroMeses.value = "";
     if (!form.profissao.value) form.profissao.placeholder = r.value === "inss" ? "Ex.: aposentada, pensionista" : r.value === "clt" ? "Ex.: auxiliar de limpeza, caixa" : "Ex.: pedreiro, diarista, motorista de aplicativo";
   }));
   form.cpf.addEventListener("input", () => erro("erro-cpf", ""));
@@ -207,11 +209,12 @@ document.addEventListener("DOMContentLoaded", () => {
     if (filhos > 0 && gasto === null) { ok = false; primeiro = primeiro || form.gastoFilhos; }
     const tv = parseInt(form.tempoMoradia.value, 10), meses = form.tempoUnidade.value === "anos" ? tv * 12 : tv;
     if (!(tv >= 0)) { ok = false; primeiro = primeiro || form.tempoMoradia; }
+    if (form.vinculo.value === "clt" && !(parseInt(form.registroMeses.value, 10) >= 0)) { ok = false; primeiro = primeiro || form.registroMeses; }
     if (!ok) { if (primeiro) { primeiro.scrollIntoView({ behavior: "smooth", block: "center" }); primeiro.focus(); } form.reportValidity(); return; }
 
     const d = { etapa: 2, leadId: LEAD_ID, nome: form.nome.value.trim(), whatsapp: digitos(form.whatsapp.value).replace(/^55(?=\d{10,11}$)/, ""), cep: digitos(form.cep.value), rua: form.rua.value.trim(), bairro: form.bairro.value.trim(), cidade: form.cidade.value.trim(), uf: form.uf.value || "PR",
       numero: form.numero.value.trim(), complemento: form.complemento.value.trim(), cpf: digitos(form.cpf.value), nascimento: form.nascimento.value, cesta: form.cesta.value, vinculo: form.vinculo.value, profissao: form.profissao.value.trim(),
-      renda: renda, rendaComprovada: form.rendaComprovada.checked, pagaAluguel: alugada, aluguelValor: aluguel, aguaLuz: aguaLuz, filhos: filhos, gastoFilhos: gasto || 0, tempoMoradiaMeses: meses, ref: REF, origem: "site" };
+      renda: renda, rendaComprovada: form.rendaComprovada.checked, pagaAluguel: alugada, aluguelValor: aluguel, aguaLuz: aguaLuz, filhos: filhos, gastoFilhos: gasto || 0, tempoMoradiaMeses: meses, registroMeses: form.vinculo.value === "clt" ? parseInt(form.registroMeses.value, 10) : null, ref: REF, origem: "site", ...origemTrafego() };
     const botao = el("btn-enviar"); botao.disabled = true; botao.textContent = "Enviando…"; status.className = "cadastro-status";
     const [web, planilha] = await Promise.all([enviarWebhook(d, 9000), enviarPlanilha(d)]);
     botao.disabled = false; botao.textContent = "Enviar Cadastro";
