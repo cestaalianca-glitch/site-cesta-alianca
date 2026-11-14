@@ -1,0 +1,95 @@
+/* Acabamento do Bloco 11: mantém as cores e a estrutura do estilo.css (azul-marinho + dourado) e acrescenta o que é novo.
+   Preços e parcelas em destaque, selos, prova social, barra de ação no celular e o cadastro em 2 etapas. */
+
+/* ---------- Hero: selos de confiança ---------- */
+.selos-hero { display: flex; flex-wrap: wrap; gap: 8px 10px; margin: 22px 0 6px; padding: 0; list-style: none; }
+.selos-hero li { display: inline-flex; align-items: center; gap: 8px; padding: 8px 14px; border-radius: 999px; background: rgba(255,255,255,.12); border: 1px solid rgba(242,183,5,.55); color: #fff; font-size: .92rem; font-weight: 600; line-height: 1.2; }
+.selos-hero li svg { width: 18px; height: 18px; flex: none; color: var(--dourado); }
+.hero-preco { margin-top: 14px; font-size: 1.05rem; color: #fff; }
+.hero-preco strong { color: var(--dourado); }
+
+/* ---------- Cestas: preço e parcelas ---------- */
+.cartao-cesta { display: flex; flex-direction: column; }
+.cartao-cesta .btn { margin-top: auto; align-self: flex-start; }
+.preco-cesta { margin: 12px 0 14px; padding: 12px 14px; border-radius: 10px; background: #fff9e6; border: 1px solid var(--dourado); }
+.preco-cesta .preco-valor { display: block; font-family: var(--fonte-titulo); font-weight: 800; font-size: 1.9rem; line-height: 1.1; color: var(--azul-marinho); }
+.preco-cesta .preco-parcelas { display: block; margin-top: 4px; font-weight: 700; color: var(--azul-marinho); }
+.preco-cesta .preco-prazo { display: block; font-size: .88rem; color: var(--cor-texto-claro); }
+.cartao-cesta-destaque .preco-cesta { background: var(--azul-marinho); border-color: var(--azul-marinho); }
+.cartao-cesta-destaque .preco-cesta .preco-valor,
+.cartao-cesta-destaque .preco-cesta .preco-parcelas { color: #fff; }
+.cartao-cesta-destaque .preco-cesta .preco-prazo { color: #d7dcea; }
+.cartao-cesta-destaque .preco-cesta .preco-valor span { color: var(--dourado); }
+.faixa-condicoes { display: flex; flex-wrap: wrap; justify-content: center; gap: 10px 14px; margin: 26px auto 0; padding: 0; list-style: none; }
+.faixa-condicoes li { padding: 8px 16px; border-radius: 999px; background: var(--azul-marinho); color: #fff; font-weight: 600; font-size: .95rem; }
+.faixa-condicoes li strong { color: var(--dourado); }
+
+/* ---------- Prova social ---------- */
+.prova-social { display: grid; grid-template-columns: repeat(auto-fit, minmax(160px, 1fr)); gap: 14px; margin: 30px 0 0; padding: 0; list-style: none; }
+.prova-social li { text-align: center; padding: 18px 12px; border-radius: 12px; background: #fff; border: 1px solid var(--cor-borda); }
+.prova-social strong { display: block; font-family: var(--fonte-titulo); font-size: 1.7rem; line-height: 1.1; color: var(--azul-marinho); }
+.prova-social span { display: block; margin-top: 4px; font-size: .9rem; color: var(--cor-texto-claro); }
+.areas-grid .area-item { transition: transform .15s ease, border-color .15s ease; }
+.areas-grid .area-item:hover { transform: translateY(-2px); border-color: var(--dourado); }
+.cobertura-nota { margin-top: 18px; text-align: center; font-weight: 600; color: var(--azul-marinho); }
+.cobertura-nota a { color: var(--dourado-escuro); text-decoration: underline; }
+
+/* ---------- Barra de ação fixa no celular ---------- */
+.cta-fixa-mobile { display: none; }
+@media (max-width: 720px) {
+  body.tem-cta-fixa { padding-bottom: 76px; }
+  .cta-fixa-mobile { position: fixed; left: 0; right: 0; bottom: 0; z-index: 90; display: grid; grid-template-columns: 1.4fr 1fr; gap: 10px; padding: 10px 14px calc(10px + env(safe-area-inset-bottom, 0px)); background: var(--azul-marinho); border-top: 3px solid var(--dourado); box-shadow: 0 -6px 18px rgba(0,0,0,.18); }
+  .cta-fixa-mobile .btn { display: flex; align-items: center; justify-content: center; min-height: 48px; padding: 8px 10px; text-align: center; font-size: 1rem; }
+  .whatsapp-flutuante { display: none; }
+  .selos-hero li { font-size: .85rem; padding: 7px 12px; }
+  .hero { padding: 84px 0 64px; min-height: 0; }
+  .preco-cesta .preco-valor { font-size: 1.7rem; }
+  .btn { min-height: 46px; }
+}
+
+/* ---------- Cadastro em 2 etapas ---------- */
+.cadastro-rapido { max-width: 640px; }
+.selos-linha { display: flex; flex-wrap: wrap; gap: 8px; margin: 16px 0 8px; padding: 0; list-style: none; }
+.selos-linha li { padding: 7px 13px; border-radius: 999px; background: #fff9e6; border: 1px solid var(--dourado); font-size: .9rem; color: var(--azul-marinho); }
+.passos-barra { display: grid; grid-template-columns: 1fr 1fr; gap: 8px; margin: 18px 0 22px; padding: 0; list-style: none; counter-reset: p; }
+.passos-barra li { display: flex; align-items: center; gap: 10px; padding: 10px 12px; border-radius: 10px; background: var(--cor-fundo-alt); color: var(--cor-texto-claro); font-weight: 600; font-size: .92rem; border: 2px solid transparent; }
+.passos-barra li span { display: grid; place-items: center; width: 26px; height: 26px; flex: none; border-radius: 50%; background: var(--cor-borda); color: var(--azul-marinho); font-weight: 800; font-size: .85rem; }
+.passos-barra li.ativo { background: #fff; border-color: var(--dourado); color: var(--azul-marinho); }
+.passos-barra li.ativo span, .passos-barra li.feito span { background: var(--dourado); }
+.passos-barra li.feito { color: var(--azul-marinho); }
+.etapa legend { font-family: var(--fonte-titulo); font-weight: 700; color: var(--azul-marinho); }
+.etapa { display: flex; flex-direction: column; gap: 18px; }
+.etapa[hidden] { display: none; }
+.campo-dupla { display: grid; grid-template-columns: 1fr 1fr; gap: 14px; }
+.campo-tempo { grid-template-columns: 1fr 1fr; }
+.campo .rotulo { display: block; font-weight: 600; margin-bottom: 8px; }
+.cep-resultado { display: flex; flex-direction: column; gap: 18px; padding: 16px; border-left: 3px solid var(--dourado); background: var(--cor-fundo); border-radius: 0 10px 10px 0; }
+.aviso-regiao { padding: 12px 14px; border-radius: 10px; font-weight: 600; line-height: 1.4; }
+.aviso-regiao.ok { background: #e8f7ee; border: 1px solid #25a45a; color: #14663a; }
+.aviso-regiao.fora { background: #fdecea; border: 1px solid #d64545; color: #8a1f1f; }
+.aviso-regiao a { text-decoration: underline; }
+.opcoes-cesta { display: grid; grid-template-columns: 1fr 1fr; gap: 12px; }
+.opcao-cesta { position: relative; display: block; cursor: pointer; }
+.opcao-cesta input { position: absolute; opacity: 0; inset: 0; width: 100%; height: 100%; cursor: pointer; }
+.opcao-cesta > span { display: flex; flex-direction: column; gap: 2px; height: 100%; padding: 14px; border-radius: 12px; border: 2px solid var(--cor-borda); background: #fff; transition: border-color .15s ease, background .15s ease; }
+.opcao-cesta strong { color: var(--azul-marinho); }
+.opcao-cesta em { font-style: normal; font-family: var(--fonte-titulo); font-weight: 800; font-size: 1.5rem; color: var(--azul-marinho); }
+.opcao-cesta small { color: var(--cor-texto-claro); }
+.opcao-cesta:has(input:checked) > span { border-color: var(--dourado); background: #fff9e6; box-shadow: 0 0 0 3px rgba(242,183,5,.3); }
+.opcao-cesta:has(input:focus-visible) > span { outline: 3px solid var(--azul-marinho); outline-offset: 2px; }
+.opcao-lgpd { margin-top: 4px; }
+.acoes-etapa { display: grid; grid-template-columns: 1fr 2fr; gap: 12px; }
+.acoes-etapa .btn { min-height: 52px; }
+.nota-privacidade, .cadastro-alternativa { font-size: .88rem; color: var(--cor-texto-claro); }
+.cadastro-alternativa { margin-top: 22px; text-align: center; }
+.cadastro-alternativa a { color: var(--dourado-escuro); text-decoration: underline; }
+.cadastro-status.status-erro { display: block; background: #fdecea; color: #8a1f1f; }
+.campo input:focus-visible, .campo select:focus-visible, .btn:focus-visible { outline: 3px solid var(--dourado); outline-offset: 2px; }
+.campo input, .campo select { min-height: 48px; font-size: 16px; }   /* 16px evita o zoom automático do iPhone */
+@media (max-width: 520px) {
+  .campo-dupla, .opcoes-cesta { grid-template-columns: 1fr; }
+  .campo-tempo { grid-template-columns: 1fr 1fr; }
+  .acoes-etapa { grid-template-columns: 1fr; }
+  .passos-barra li { font-size: .82rem; padding: 8px 10px; }
+}
+@media (prefers-reduced-motion: reduce) { * { transition: none !important; scroll-behavior: auto !important; } }

@@ -7,9 +7,14 @@
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@600;700;800&family=Inter:wght@400;500;600&display=swap" rel="stylesheet">
+<meta name="theme-color" content="#0d1b40">
+<meta name="description" content="Cestas básicas desde 2004 em Londrina e região. Cesta Padrão R$ 530 (2x de R$ 265) e Cesta Grande R$ 640 (2x de R$ 320), em 30 e 60 dias, entregues na sua porta.">
+<meta property="og:title" content="Cesta Básica Aliança — cestas em 2x, direto na sua porta">
+<meta property="og:description" content="Padrão R$ 530 (2x de R$ 265) · Grande R$ 640 (2x de R$ 320) · 30 e 60 dias. Londrina e região desde 2004.">
 <link rel="stylesheet" href="estilo.css">
+<link rel="stylesheet" href="estilo-bloco11.css">
 </head>
-<body>
+<body class="tem-cta-fixa">
 
   <header class="header">
     <div class="container header-inner">
@@ -41,11 +46,17 @@
       <div class="hero-texto">
         <span class="selo-desde">Desde 2004</span>
         <h1>Cestas básicas de confiança, direto na sua porta.</h1>
-        <p>Mais de 20 anos levando cestas básicas para famílias, no tradicional estilo porta a porta ou por contato direto. Pagamento facilitado em 30 ou 60 dias.</p>
+        <p>Mais de 20 anos levando cestas básicas para famílias, no tradicional estilo porta a porta ou por contato direto. Pagamento facilitado em 2x, nos prazos de 30 e 60 dias.</p>
+        <p class="hero-preco"><strong>Padrão R$ 530</strong> em 2x de R$ 265 · <strong>Grande R$ 640</strong> em 2x de R$ 320</p>
         <div class="hero-botoes">
           <a class="btn btn-primario" href="cadastro.html">Fazer Meu Cadastro</a>
           <a class="btn btn-secundario btn-secundario-hero" href="montar-cesta.html">Montar Minha Cesta</a>
         </div>
+        <ul class="selos-hero" aria-label="Diferenciais">
+          <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M3 12h13l4 4v-8h-4V6H3v6z"/><circle cx="7.5" cy="18" r="1.5"/><circle cx="16.5" cy="18" r="1.5"/></svg>Entrega rápida na sua região</li>
+          <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="2" y="5" width="20" height="14" rx="2"/><path d="M2 10h20"/></svg>2x: 30 e 60 dias</li>
+          <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 2l8 4v6c0 5-3.5 8.5-8 10-4.5-1.5-8-5-8-10V6l8-4z"/></svg>Desde 2004</li>
+        </ul>
         <p class="hero-nota-contato">Prefere falar direto com a gente? <a href="https://wa.me/5543999937211" target="_blank" rel="noopener">Chame no WhatsApp</a>.</p>
       </div>
     </div>
@@ -80,9 +91,15 @@
             <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><rect x="2" y="5" width="20" height="14" rx="2"/><path d="M2 10h20"/></svg>
           </div>
           <h3>Pagamento a Prazo</h3>
-          <p>Parcele em 30 ou 60 dias, sem burocracia.</p>
+          <p>Parcele em 2x, a 30 e 60 dias, sem burocracia.</p>
         </div>
       </div>
+      <ul class="prova-social" aria-label="A Aliança em números">
+        <li><strong>Desde 2004</strong><span>mais de 20 anos de estrada</span></li>
+        <li><strong>+23 mil</strong><span>clientes cadastrados na nossa história</span></li>
+        <li><strong>20+ cidades</strong><span>e distritos com rota ativa</span></li>
+        <li><strong>3 gerações</strong><span>da mesma família</span></li>
+      </ul>
     </div>
   </section>
 
@@ -98,12 +115,12 @@
         <div class="passo">
           <span class="passo-numero">2</span>
           <h3>Escolha sua cesta</h3>
-          <p>Cesta Padrão, Cesta Grande, ou monte a sua do seu jeito.</p>
+          <p>Cesta Padrão (R$ 530) ou Cesta Grande (R$ 640), ou monte a sua do seu jeito.</p>
         </div>
         <div class="passo">
           <span class="passo-numero">3</span>
           <h3>Combine o pagamento</h3>
-          <p>Pague à vista ou parcele em até 30/60 dias.</p>
+          <p>Pague à vista ou parcele em 2x: 30 e 60 dias.</p>
         </div>
         <div class="passo">
           <span class="passo-numero">4</span>
@@ -123,14 +140,16 @@
           <h3>Cesta Padrão</h3>
           <p class="cartao-cesta-selo">+50 itens</p>
           <p>Arroz, feijão, óleo, café, macarrão, produtos de limpeza e higiene — o essencial para o mês da sua família.</p>
-          <a class="btn btn-whatsapp" href="https://wa.me/5543999937211?text=Ol%C3%A1!%20Quero%20consultar%20o%20valor%20da%20Cesta%20Padr%C3%A3o." target="_blank" rel="noopener">Consultar Valor</a>
+          <div class="preco-cesta"><span class="preco-valor">R$ 530</span><span class="preco-parcelas">2x de R$ 265</span><span class="preco-prazo">parcelas em 30 e 60 dias</span></div>
+          <a class="btn btn-primario" href="cadastro.html?cesta=padrao">Quero a Cesta Padrão</a>
         </div>
         <div class="cartao-cesta cartao-cesta-destaque">
           <img class="cartao-cesta-imagem" src="imagens/cesta-grande.jpg" alt="Itens da Cesta Grande">
           <h3>Cesta Grande</h3>
           <p class="cartao-cesta-selo">+60 itens</p>
           <p>Tudo da Cesta Padrão em maior quantidade, além de itens extras como ovos, carnes e achocolatado.</p>
-          <a class="btn btn-whatsapp" href="https://wa.me/5543999937211?text=Ol%C3%A1!%20Quero%20consultar%20o%20valor%20da%20Cesta%20Grande." target="_blank" rel="noopener">Consultar Valor</a>
+          <div class="preco-cesta"><span class="preco-valor"><span>R$ 640</span></span><span class="preco-parcelas">2x de R$ 320</span><span class="preco-prazo">parcelas em 30 e 60 dias</span></div>
+          <a class="btn btn-primario" href="cadastro.html?cesta=grande">Quero a Cesta Grande</a>
         </div>
         <div class="cartao-cesta">
           <div class="cartao-cesta-icone" aria-hidden="true">
@@ -142,7 +161,12 @@
           <a class="btn btn-secundario" href="montar-cesta.html">Montar Agora</a>
         </div>
       </div>
-      <p class="galeria-nota">* Os valores das cestas são informados diretamente pelo nosso atendente via WhatsApp.</p>
+      <ul class="faixa-condicoes" aria-label="Condições de pagamento">
+        <li>Parcelamento em <strong>2x</strong></li>
+        <li>Vencimentos em <strong>30 e 60 dias</strong></li>
+        <li><strong>Entrega rápida</strong> na região</li>
+      </ul>
+      <p class="galeria-nota">* Cadastro sujeito a análise. Quer outra forma de pagamento (à vista, Pix, cartão)? Fale com o nosso atendente no WhatsApp.</p>
     </div>
   </section>
 
@@ -155,20 +179,30 @@
         já atenda sua região também.
       </p>
       <div class="areas-grid">
-        <span class="area-item">Cambé</span>
         <span class="area-item">Londrina</span>
+        <span class="area-item">Cambé</span>
+        <span class="area-item">Rolândia</span>
+        <span class="area-item">Jaguapitã</span>
+        <span class="area-item">Ibiporã</span>
         <span class="area-item">Apucarana</span>
         <span class="area-item">Arapongas</span>
-        <span class="area-item">Ibiporã</span>
-        <span class="area-item">Porecatu</span>
-        <span class="area-item">Tamarana</span>
+        <span class="area-item">Bela Vista do Paraíso</span>
         <span class="area-item">Sertanópolis</span>
         <span class="area-item">Florestópolis</span>
         <span class="area-item">Alvorada do Sul</span>
         <span class="area-item">Primeiro de Maio</span>
+        <span class="area-item">Porecatu</span>
         <span class="area-item">Marilândia do Sul</span>
-        <span class="area-item">Bela Vista do Paraíso</span>
+        <span class="area-item">Tamarana</span>
+        <span class="area-item">São Martinho</span>
+        <span class="area-item">Jataizinho</span>
+        <span class="area-item">Prado Ferreira</span>
+        <span class="area-item">Centenário do Sul</span>
+        <span class="area-item">Guaraci</span>
+        <span class="area-item">Bentópolis</span>
+        <span class="area-item">Califórnia</span>
       </div>
+      <p class="cobertura-nota">Digite o seu CEP no <a href="cadastro.html">cadastro</a> e a gente confere na hora se a sua rua tem rota.</p>
       <p class="areas-distritos">
         <strong>Também atendemos os distritos e bairros:</strong>
         Irerê, Guaravera, Maravilha, Paiquerê e Vila Reis (região de Londrina/Apucarana), Ibiaci e Espírito Santo.
@@ -190,7 +224,7 @@
         </details>
         <details class="faq-item">
           <summary>Quais são os prazos de pagamento?</summary>
-          <p>Você pode pagar à vista ou parcelado, por meio de promissória: a primeira parcela vence em até 30 dias e a segunda em até 60 dias. Os valores são sempre combinados diretamente com o nosso atendente, de acordo com a cesta escolhida.</p>
+          <p>Você pode pagar à vista ou parcelado em 2x, por meio de promissória: a primeira parcela vence em 30 dias e a segunda em 60 dias. Cesta Padrão: R$ 530 (2x de R$ 265). Cesta Grande: R$ 640 (2x de R$ 320).</p>
         </details>
         <details class="faq-item">
           <summary>Como funciona a entrega?</summary>
@@ -234,6 +268,11 @@
       <p>&copy; <span id="ano"></span> Cesta Básica Aliança. Desde 2004.</p>
     </div>
   </footer>
+
+  <div class="cta-fixa-mobile">
+    <a class="btn btn-primario" href="cadastro.html">Fazer meu cadastro</a>
+    <a class="btn btn-whatsapp" href="https://wa.me/5543999937211" target="_blank" rel="noopener">WhatsApp</a>
+  </div>
 
   <a class="whatsapp-flutuante" href="https://wa.me/5543999937211" target="_blank" rel="noopener" aria-label="Fale no WhatsApp">
     WhatsApp

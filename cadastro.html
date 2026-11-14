@@ -3,11 +3,14 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="theme-color" content="#0d1b40">
 <title>Cadastre-se - Cesta Básica Aliança</title>
+<meta name="description" content="Faça seu cadastro na Cesta Básica Aliança em 2 passos rápidos. Cesta Padrão R$ 530 (2x de R$ 265) e Cesta Grande R$ 640 (2x de R$ 320), em 30 e 60 dias.">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@600;700;800&family=Inter:wght@400;500;600&display=swap" rel="stylesheet">
 <link rel="stylesheet" href="estilo.css">
+<link rel="stylesheet" href="estilo-bloco11.css">
 </head>
 <body>
 
@@ -22,9 +25,9 @@
       </button>
       <nav class="nav" id="nav-principal">
         <a href="index.html#sobre">Sobre</a>
+        <a href="index.html#cestas">Cestas</a>
         <a href="index.html#areas">Áreas Atendidas</a>
         <a href="index.html#faq">Dúvidas</a>
-        <a href="index.html#contato">Contato</a>
         <a class="btn btn-whatsapp nav-cta-mobile" href="https://wa.me/5543999937211" target="_blank" rel="noopener">Fale no WhatsApp</a>
       </nav>
       <a class="btn btn-whatsapp nav-cta" href="https://wa.me/5543999937211" target="_blank" rel="noopener">Fale no WhatsApp</a>
@@ -32,398 +35,174 @@
   </header>
 
   <section class="secao secao-cadastro">
-    <div class="container">
+    <div class="container cadastro-rapido">
       <h1>Faça o Seu Cadastro</h1>
-      <p class="cadastro-intro">
-        Preencha seus dados abaixo. É rápido e simples. Depois de enviar, nossa equipe entra em
-        contato para confirmar tudo com você.
-      </p>
-      <p class="cadastro-legenda-obrigatorio">Campos com <span class="obrigatorio">*</span> são obrigatórios.</p>
+      <p class="cadastro-intro">Dois passos rápidos. Depois, a gente chama você no WhatsApp para combinar os comprovantes e a entrega.</p>
 
-      <div class="cadastro-ajuda">
-        <p class="cadastro-ajuda-texto">
-          <strong>Ficou com dúvida ou não conseguiu preencher?</strong> Fale com a gente que a
-          gente ajuda a fazer o cadastro por telefone.
-        </p>
-        <div class="cadastro-ajuda-botoes">
-          <a class="btn btn-whatsapp" href="https://wa.me/5543999937211" target="_blank" rel="noopener">WhatsApp: (43) 99993-7211</a>
-          <a class="btn btn-telefone" href="tel:+554333420910">Telefone: (43) 3342-0910</a>
-        </div>
-      </div>
+      <ul class="selos-linha" aria-label="Condições">
+        <li><strong>Padrão R$ 530</strong> em 2x de R$ 265</li>
+        <li><strong>Grande R$ 640</strong> em 2x de R$ 320</li>
+        <li>Parcelas em <strong>30 e 60 dias</strong></li>
+      </ul>
 
-      <form id="form-cadastro" class="form-cadastro" novalidate>
+      <ol class="passos-barra" aria-label="Etapas">
+        <li id="barra-1" class="ativo" aria-current="step"><span>1</span> Seus contatos</li>
+        <li id="barra-2"><span>2</span> Dados do crediário</li>
+      </ol>
+
+      <form id="form-rapido" class="form-cadastro" novalidate autocomplete="on">
         <div class="campo campo-honeypot" aria-hidden="true">
           <label for="informacao_extra">Não preencha este campo</label>
           <input type="text" id="informacao_extra" name="informacao_extra" tabindex="-1" autocomplete="off">
         </div>
 
-        <fieldset class="form-secao">
-          <legend>Dados Pessoais</legend>
-
+        <!-- ETAPA 1: captura rápida -->
+        <fieldset class="form-secao etapa" id="etapa-1">
+          <legend>Passo 1 de 2 · Seus contatos</legend>
           <div class="campo">
             <label for="nome">Nome completo <span class="obrigatorio">*</span></label>
-            <input type="text" id="nome" name="nome" required autocomplete="name">
+            <input type="text" id="nome" name="nome" autocomplete="name" required maxlength="80">
           </div>
+          <div class="campo">
+            <label for="whatsapp">WhatsApp (com DDD) <span class="obrigatorio">*</span></label>
+            <input type="tel" id="whatsapp" name="whatsapp" inputmode="numeric" autocomplete="tel-national" placeholder="(43) 99999-9999" required>
+            <p class="campo-erro" id="erro-whatsapp" role="alert"></p>
+          </div>
+          <div class="campo">
+            <label for="cep">CEP <span class="obrigatorio">*</span></label>
+            <input type="text" id="cep" name="cep" inputmode="numeric" autocomplete="postal-code" placeholder="00000-000" required>
+            <p class="campo-ajuda" id="ajuda-cep">Digite o CEP que a gente preenche a rua, o bairro e a cidade.</p>
+            <p class="campo-erro" id="erro-cep" role="alert"></p>
+          </div>
+          <div class="cep-resultado" id="cep-resultado" hidden>
+            <div class="campo">
+              <label for="rua">Rua <span class="obrigatorio">*</span></label>
+              <input type="text" id="rua" name="rua" autocomplete="address-line1" maxlength="90">
+            </div>
+            <div class="campo-dupla">
+              <div class="campo">
+                <label for="bairro">Bairro <span class="obrigatorio">*</span></label>
+                <input type="text" id="bairro" name="bairro" maxlength="70">
+              </div>
+              <div class="campo">
+                <label for="cidade">Cidade <span class="obrigatorio">*</span></label>
+                <input type="text" id="cidade" name="cidade" autocomplete="address-level2" maxlength="60">
+              </div>
+            </div>
+            <input type="hidden" id="uf" name="uf" value="PR">
+          </div>
+          <div class="aviso-regiao" id="aviso-regiao" role="status" hidden></div>
+          <button type="button" class="btn btn-primario btn-enviar-cadastro" id="btn-continuar">Continuar</button>
+          <p class="nota-privacidade">Seus dados ficam só com a Cesta Básica Aliança e são usados para analisar o cadastro e falar com você.</p>
+        </fieldset>
 
+        <!-- ETAPA 2: dados reais do crediário (nenhum valor é estimado) -->
+        <fieldset class="form-secao etapa" id="etapa-2" hidden>
+          <legend>Passo 2 de 2 · Dados do crediário</legend>
+          <p class="cadastro-ajuda-texto">Informe os valores <strong>reais</strong> do seu dia a dia. Não precisa chutar: se não souber de cabeça, olhe a conta ou o contracheque.</p>
+
+          <div class="campo-dupla">
+            <div class="campo">
+              <label for="numero">Número da casa <span class="obrigatorio">*</span></label>
+              <input type="text" id="numero" name="numero" autocomplete="address-line2" maxlength="10" required>
+            </div>
+            <div class="campo">
+              <label for="complemento">Complemento</label>
+              <input type="text" id="complemento" name="complemento" maxlength="40">
+            </div>
+          </div>
           <div class="campo">
             <label for="cpf">CPF <span class="obrigatorio">*</span></label>
-            <input type="text" id="cpf" name="cpf" required inputmode="numeric" placeholder="000.000.000-00" maxlength="14" title="Digite um CPF válido com 11 números">
-            <span class="campo-erro" id="erro-cpf"></span>
-            <span class="campo-aviso-cpf" id="aviso-cpf-existente"></span>
+            <input type="text" id="cpf" name="cpf" inputmode="numeric" placeholder="000.000.000-00" required>
+            <p class="campo-erro" id="erro-cpf" role="alert"></p>
+          </div>
+          <div class="campo">
+            <label for="nascimento">Data de nascimento</label>
+            <input type="date" id="nascimento" name="nascimento" autocomplete="bday">
           </div>
 
           <div class="campo">
-            <label for="rg">RG</label>
-            <input type="text" id="rg" name="rg">
+            <span class="rotulo">Qual cesta você quer? <span class="obrigatorio">*</span></span>
+            <div class="opcoes-cesta">
+              <label class="opcao-cesta"><input type="radio" name="cesta" value="padrao" required><span><strong>Cesta Padrão</strong><em>R$ 530</em><small>2x de R$ 265 · 30 e 60 dias</small></span></label>
+              <label class="opcao-cesta"><input type="radio" name="cesta" value="grande"><span><strong>Cesta Grande</strong><em>R$ 640</em><small>2x de R$ 320 · 30 e 60 dias</small></span></label>
+            </div>
+            <p class="campo-ajuda">Quer montar do seu jeito? Depois do cadastro a gente combina pelo WhatsApp.</p>
           </div>
 
           <div class="campo">
-            <label for="nascimento">Data de Nascimento <span class="obrigatorio">*</span></label>
-            <input type="date" id="nascimento" name="nascimento" required>
-          </div>
-
-          <div class="campo">
-            <label for="estadoCivil">Estado Civil <span class="obrigatorio">*</span></label>
-            <select id="estadoCivil" name="estadoCivil" required>
-              <option value="">Selecione</option>
-              <option value="Solteiro(a)">Solteiro(a)</option>
-              <option value="Casado(a)">Casado(a)</option>
-              <option value="União Estável">União Estável</option>
-              <option value="Divorciado(a)">Divorciado(a)</option>
-              <option value="Viúvo(a)">Viúvo(a)</option>
-            </select>
-          </div>
-
-          <div class="campo">
-            <label for="pai">Nome do Pai</label>
-            <input type="text" id="pai" name="pai">
-          </div>
-
-          <div class="campo">
-            <label for="mae">Nome da Mãe <span class="obrigatorio">*</span></label>
-            <input type="text" id="mae" name="mae" required>
-          </div>
-        </fieldset>
-
-        <fieldset class="form-secao">
-          <legend>Endereço</legend>
-
-          <div class="campo">
-            <label for="endereco">Endereço (Rua/Avenida) <span class="obrigatorio">*</span></label>
-            <input type="text" id="endereco" name="endereco" required autocomplete="street-address">
-          </div>
-
-          <div class="campo">
-            <label for="numero">Número <span class="obrigatorio">*</span></label>
-            <input type="text" id="numero" name="numero" required>
-            <span class="campo-aviso-cpf" id="aviso-cliente-existente"></span>
-          </div>
-
-          <div class="campo">
-            <label for="complemento">Complemento</label>
-            <input type="text" id="complemento" name="complemento" placeholder="Casa, apto, fundos...">
-          </div>
-
-          <div class="campo">
-            <label for="cep">CEP</label>
-            <input type="text" id="cep" name="cep" inputmode="numeric" placeholder="00000-000 (se souber)" maxlength="9">
-            <span class="campo-erro" id="erro-cep"></span>
-          </div>
-
-          <div class="campo">
-            <label for="bairro">Bairro <span class="obrigatorio">*</span></label>
-            <input type="text" id="bairro" name="bairro" required>
-          </div>
-
-          <div class="campo">
-            <label for="cidade">Cidade <span class="obrigatorio">*</span></label>
-            <input type="text" id="cidade" name="cidade" required autocomplete="address-level2">
-          </div>
-
-          <div class="campo">
-            <label for="estado">Estado</label>
-            <input type="text" id="estado" name="estado" value="PR" maxlength="2" style="text-transform: uppercase;">
-          </div>
-
-          <div class="campo">
-            <label>Situação da Moradia <span class="obrigatorio">*</span></label>
+            <span class="rotulo">Qual é a sua fonte de renda? <span class="obrigatorio">*</span></span>
             <div class="opcoes-radio">
-              <label class="opcao-radio">
-                <input type="radio" name="situacaoMoradia" value="Própria" required>
-                Própria
-              </label>
-              <label class="opcao-radio">
-                <input type="radio" name="situacaoMoradia" value="Alugada">
-                Alugada
-              </label>
-              <label class="opcao-radio">
-                <input type="radio" name="situacaoMoradia" value="Cedida">
-                Cedida (emprestada por parente/conhecido)
-              </label>
-              <label class="opcao-radio">
-                <input type="radio" name="situacaoMoradia" value="Financiada">
-                Financiada
-              </label>
+              <label class="opcao-radio"><input type="radio" name="vinculo" value="inss" required><span>Aposentado(a) / Pensionista (INSS)</span></label>
+              <label class="opcao-radio"><input type="radio" name="vinculo" value="clt"><span>Carteira assinada (CLT)</span></label>
+              <label class="opcao-radio"><input type="radio" name="vinculo" value="autonomo"><span>Autônomo(a)</span></label>
             </div>
           </div>
-
-          <div class="campo campo-condicional" id="campo-valor-aluguel" hidden>
-            <label for="valorAluguel">Valor do Aluguel <span class="obrigatorio">*</span></label>
-            <input type="text" id="valorAluguel" name="valorAluguel" inputmode="numeric" placeholder="R$ 0,00">
+          <div class="campo">
+            <label for="profissao">Profissão <span class="obrigatorio">*</span></label>
+            <input type="text" id="profissao" name="profissao" maxlength="60" placeholder="Ex.: aposentada, auxiliar de limpeza, pedreiro" required>
+          </div>
+          <div class="campo">
+            <label for="renda">Renda mensal comprovada (R$) <span class="obrigatorio">*</span></label>
+            <input type="text" id="renda" name="renda" inputmode="numeric" placeholder="R$ 0,00" required>
+            <label class="opcao-checkbox"><input type="checkbox" id="rendaComprovada" name="rendaComprovada"><span>Tenho comprovante dessa renda (holerite, extrato do INSS, extrato bancário)</span></label>
           </div>
 
           <div class="campo">
-            <label for="tempoMoradia">Há quanto tempo mora neste endereço? <span class="obrigatorio">*</span></label>
-            <select id="tempoMoradia" name="tempoMoradia" required>
-              <option value="">Selecione</option>
-              <option value="Menos de 1 ano">Menos de 1 ano</option>
-              <option value="1 a 3 anos">1 a 3 anos</option>
-              <option value="3 a 5 anos">3 a 5 anos</option>
-              <option value="Mais de 5 anos">Mais de 5 anos</option>
-            </select>
-          </div>
-        </fieldset>
-
-        <fieldset class="form-secao">
-          <legend>Situação de Trabalho</legend>
-
-          <div class="campo">
-            <label>Qual a situação de trabalho? <span class="obrigatorio">*</span></label>
+            <span class="rotulo">Sua moradia <span class="obrigatorio">*</span></span>
             <div class="opcoes-radio">
-              <label class="opcao-radio">
-                <input type="radio" name="situacaoTrabalho" value="Registrado (CLT)" required>
-                Registrado (CLT)
-              </label>
-              <label class="opcao-radio">
-                <input type="radio" name="situacaoTrabalho" value="Benefício/Aposentadoria">
-                Benefício/Aposentadoria
-              </label>
-              <label class="opcao-radio">
-                <input type="radio" name="situacaoTrabalho" value="Diarista/Informal">
-                Diarista/Informal
-              </label>
-              <label class="opcao-radio">
-                <input type="radio" name="situacaoTrabalho" value="Do lar">
-                Do lar
-              </label>
+              <label class="opcao-radio"><input type="radio" name="moradia" value="alugada" required><span>Pago aluguel</span></label>
+              <label class="opcao-radio"><input type="radio" name="moradia" value="propria"><span>Casa própria (sem aluguel)</span></label>
             </div>
           </div>
-
-          <div class="bloco-condicional" id="bloco-clt" hidden>
+          <div class="campo" id="campo-aluguel" hidden>
+            <label for="aluguelValor">Valor do aluguel por mês (R$) <span class="obrigatorio">*</span></label>
+            <input type="text" id="aluguelValor" name="aluguelValor" inputmode="numeric" placeholder="R$ 0,00">
+          </div>
+          <div class="campo">
+            <label for="aguaLuz">Água + luz: valor médio por mês (R$) <span class="obrigatorio">*</span></label>
+            <input type="text" id="aguaLuz" name="aguaLuz" inputmode="numeric" placeholder="R$ 0,00" required>
+          </div>
+          <div class="campo-dupla">
             <div class="campo">
-              <label for="nomeEmpresa">Nome da Empresa <span class="obrigatorio">*</span></label>
-              <input type="text" id="nomeEmpresa" name="nomeEmpresa">
+              <label for="filhos">Filhos/dependentes que moram com você <span class="obrigatorio">*</span></label>
+              <input type="number" id="filhos" name="filhos" min="0" max="20" step="1" inputmode="numeric" placeholder="0" required>
             </div>
-            <div class="campo">
-              <label for="cargoClt">Cargo/Função <span class="obrigatorio">*</span></label>
-              <input type="text" id="cargoClt" name="cargoClt" placeholder="Ex: operador de caixa, auxiliar de produção...">
-            </div>
-            <div class="campo">
-              <label for="dataAdmissao">Data de Admissão</label>
-              <input type="date" id="dataAdmissao" name="dataAdmissao">
-            </div>
-            <div class="campo">
-              <label for="enderecoEmpresa">Endereço da Empresa</label>
-              <input type="text" id="enderecoEmpresa" name="enderecoEmpresa" placeholder="Rua, bairro, cidade...">
-            </div>
-            <div class="campo">
-              <label for="telefoneEmpresa">Telefone da Empresa</label>
-              <input type="tel" id="telefoneEmpresa" name="telefoneEmpresa">
+            <div class="campo" id="campo-gasto-filhos" hidden>
+              <label for="gastoFilhos">Gasto mensal com eles (R$) <span class="obrigatorio">*</span></label>
+              <input type="text" id="gastoFilhos" name="gastoFilhos" inputmode="numeric" placeholder="R$ 0,00">
             </div>
           </div>
-
-          <div class="bloco-condicional" id="bloco-beneficio" hidden>
-            <div class="campo">
-              <label for="tipoBeneficio">Qual tipo de benefício? <span class="obrigatorio">*</span></label>
-              <select id="tipoBeneficio" name="tipoBeneficio">
-                <option value="">Selecione</option>
-                <option value="Aposentadoria por idade">Aposentadoria por idade</option>
-                <option value="Aposentadoria por invalidez">Aposentadoria por invalidez</option>
-                <option value="Aposentadoria por tempo de contribuição">Aposentadoria por tempo de contribuição</option>
-                <option value="Auxílio-doença">Auxílio-doença</option>
-                <option value="Pensão por morte">Pensão por morte</option>
-                <option value="BPC/LOAS">BPC/LOAS</option>
-                <option value="Bolsa Família">Bolsa Família</option>
-                <option value="Outro">Outro benefício</option>
+          <div class="campo">
+            <span class="rotulo">Há quanto tempo mora neste endereço? <span class="obrigatorio">*</span></span>
+            <div class="campo-dupla campo-tempo">
+              <input type="number" id="tempoMoradia" name="tempoMoradia" min="0" max="99" step="1" inputmode="numeric" aria-label="Quantidade" required>
+              <select id="tempoUnidade" name="tempoUnidade" aria-label="Unidade de tempo">
+                <option value="meses">meses</option>
+                <option value="anos">anos</option>
               </select>
             </div>
           </div>
 
-          <div class="bloco-condicional" id="bloco-diarista" hidden>
-            <div class="campo">
-              <label for="ocupacaoDiarista">Qual ocupação? <span class="obrigatorio">*</span></label>
-              <input type="text" id="ocupacaoDiarista" name="ocupacaoDiarista" placeholder="Ex: diarista, pedreiro, pintor, cabeleireira...">
-            </div>
-            <div class="campo">
-              <label for="frequenciaPagamento">Recebe por: <span class="obrigatorio">*</span></label>
-              <select id="frequenciaPagamento" name="frequenciaPagamento">
-                <option value="">Selecione</option>
-                <option value="Diária">Diária</option>
-                <option value="Semanal">Semanal</option>
-                <option value="Quinzenal">Quinzenal</option>
-                <option value="Mensal">Mensal</option>
-              </select>
-            </div>
-          </div>
-
-          <div class="bloco-condicional" id="bloco-dolar" hidden>
-            <div class="campo">
-              <label for="ocupacaoConjuge">Ocupação do cônjuge <span class="obrigatorio">*</span></label>
-              <input type="text" id="ocupacaoConjuge" name="ocupacaoConjuge" placeholder="Ex: motorista registrado, pedreiro autônomo...">
-            </div>
+          <label class="opcao-checkbox opcao-lgpd"><input type="checkbox" id="lgpd" name="lgpd" required><span>Autorizo a Cesta Básica Aliança a usar meus dados para analisar meu cadastro e falar comigo pelo WhatsApp.</span></label>
+          <p class="cadastro-status" id="cadastro-status" role="status"></p>
+          <div class="acoes-etapa">
+            <button type="button" class="btn btn-secundario" id="btn-voltar">Voltar</button>
+            <button type="submit" class="btn btn-primario btn-enviar-cadastro" id="btn-enviar">Enviar Cadastro</button>
           </div>
         </fieldset>
-
-        <fieldset class="form-secao">
-          <legend>Renda</legend>
-
-          <div class="campo campo-explicacao">
-            <p>💡 Perguntamos a renda de <strong>toda a casa</strong> (não só de quem está preenchendo) porque isso ajuda a gente a entender melhor a situação da família como um todo — por exemplo, quando uma pessoa não trabalha fora mas é sustentada por outra que mora junto.</p>
-          </div>
-
-          <div class="campo">
-            <label for="renda">Renda total da casa <span class="obrigatorio">*</span></label>
-            <input type="text" id="renda" name="renda" required inputmode="numeric" placeholder="R$ 0,00">
-          </div>
-
-          <div class="campo">
-            <label for="pessoasCasa">Quantas pessoas moram na casa (incluindo você)?</label>
-            <input type="number" id="pessoasCasa" name="pessoasCasa" min="1" inputmode="numeric">
-          </div>
-
-          <div class="campo">
-            <label for="pessoasComRenda">Quantas dessas pessoas têm renda própria?</label>
-            <input type="number" id="pessoasComRenda" name="pessoasComRenda" min="0" inputmode="numeric">
-          </div>
-
-          <div class="campo">
-            <label>Possui Veículo? <span class="obrigatorio">*</span></label>
-            <div class="opcoes-radio">
-              <label class="opcao-radio">
-                <input type="radio" name="possuiVeiculo" value="Sim" required>
-                Sim
-              </label>
-              <label class="opcao-radio">
-                <input type="radio" name="possuiVeiculo" value="Não">
-                Não
-              </label>
-            </div>
-          </div>
-        </fieldset>
-
-        <fieldset class="form-secao">
-          <legend>Contato</legend>
-
-          <div class="campo">
-            <label for="celular1">Celular 1 <span class="obrigatorio">*</span></label>
-            <input type="tel" id="celular1" name="celular1" required autocomplete="tel" placeholder="(43) 99999-9999" maxlength="15" title="Digite um celular válido com DDD, ex: (43) 99999-9999">
-            <span class="campo-erro" id="erro-celular1"></span>
-          </div>
-
-          <div class="campo">
-            <label for="celular2">Celular 2</label>
-            <input type="tel" id="celular2" name="celular2" placeholder="(43) 99999-9999" maxlength="15">
-          </div>
-
-          <div class="campo">
-            <label for="telefone1">Telefone 1</label>
-            <input type="tel" id="telefone1" name="telefone1" placeholder="(43) 3333-3333" maxlength="14">
-          </div>
-
-          <div class="campo">
-            <label for="telefone2">Telefone 2</label>
-            <input type="tel" id="telefone2" name="telefone2" placeholder="(43) 3333-3333" maxlength="14">
-          </div>
-        </fieldset>
-
-        <fieldset class="form-secao">
-          <legend>Sua Cesta</legend>
-
-          <div class="campo">
-            <label>Qual cesta você quer? <span class="obrigatorio">*</span></label>
-            <div class="opcoes-radio">
-              <label class="opcao-radio">
-                <input type="radio" name="cesta" value="Padrão" required>
-                Cesta Padrão
-              </label>
-              <label class="opcao-radio">
-                <input type="radio" name="cesta" value="Grande">
-                Cesta Grande
-              </label>
-              <label class="opcao-radio">
-                <input type="radio" name="cesta" value="Personalizada">
-                Cesta Personalizada (vou montar do meu jeito)
-              </label>
-            </div>
-          </div>
-
-          <div class="campo">
-            <label>Como prefere pagar? <span class="obrigatorio">*</span></label>
-            <p class="campo-ajuda">Os valores são sempre combinados diretamente com nosso atendente.</p>
-            <div class="opcoes-radio">
-              <label class="opcao-radio">
-                <input type="radio" name="pagamento" value="À vista" required>
-                À vista
-              </label>
-              <label class="opcao-radio">
-                <input type="radio" name="pagamento" value="A prazo (promissória 30/60 dias)">
-                A prazo (promissória, em até 30 e 60 dias)
-              </label>
-            </div>
-          </div>
-
-          <div class="campo">
-            <label for="horario">Melhor dia/horário para te procurar <span class="obrigatorio">*</span></label>
-            <input type="text" id="horario" name="horario" placeholder="Ex: de manhã, dias de semana" required>
-          </div>
-        </fieldset>
-
-        <fieldset class="form-secao">
-          <legend>Outras Informações</legend>
-
-          <div class="campo">
-            <label for="comoConheceu">Como conheceu a Cesta Aliança? <span class="obrigatorio">*</span></label>
-            <select id="comoConheceu" name="comoConheceu" required>
-              <option value="">Selecione</option>
-              <option value="Indicação">Indicação</option>
-              <option value="Porta a porta">Porta a porta</option>
-              <option value="WhatsApp/Redes sociais">WhatsApp/Redes sociais</option>
-              <option value="Google/Internet">Google/Internet</option>
-              <option value="Outro">Outro</option>
-            </select>
-          </div>
-
-          <div class="campo" id="campo-quem-indicou">
-            <label for="quemIndicou">Quem indicou <span class="obrigatorio campo-indicacao-obrigatorio" hidden>*</span></label>
-            <input type="text" id="quemIndicou" name="quemIndicou">
-          </div>
-
-          <div class="campo">
-            <label for="observacoes">Observações (opcional)</label>
-            <textarea id="observacoes" name="observacoes"></textarea>
-          </div>
-        </fieldset>
-
-        <div class="campo campo-checkbox">
-          <label class="opcao-checkbox">
-            <input type="checkbox" id="autorizo" name="autorizo" required>
-            Autorizo o uso dos meus dados para meu cadastro e contato comercial da Cesta Básica Aliança. <span class="obrigatorio">*</span>
-          </label>
-        </div>
-
-        <button type="submit" class="btn btn-primario btn-enviar-cadastro">Enviar Cadastro</button>
-
-        <div id="cadastro-status" class="cadastro-status" role="status"></div>
       </form>
+
+      <p class="cadastro-alternativa">Prefere o formulário completo? <a href="cadastro-completo.html">Cadastro completo</a> · Ficou com dúvida? <a href="https://wa.me/5543999937211" target="_blank" rel="noopener">Chame no WhatsApp</a>.</p>
     </div>
   </section>
 
   <div id="modal-sucesso" class="modal-veu" hidden>
     <div class="modal-caixa" role="dialog" aria-modal="true" aria-labelledby="modal-sucesso-titulo">
-      <div class="modal-icone">✓</div>
-      <h2 id="modal-sucesso-titulo">Cadastro enviado com sucesso!</h2>
-      <p id="modal-sucesso-texto">Entraremos em contato em breve.</p>
-      <button type="button" id="btn-fechar-modal" class="btn btn-primario">Fechar</button>
+      <div class="modal-icone" aria-hidden="true">✓</div>
+      <h2 id="modal-sucesso-titulo">Cadastro recebido!</h2>
+      <p id="modal-sucesso-texto">Você vai receber uma mensagem da gente no WhatsApp para enviar a foto dos comprovantes.</p>
+      <button type="button" class="btn btn-primario" id="btn-fechar-modal">Fechar</button>
     </div>
   </div>
 
@@ -433,10 +212,9 @@
     </div>
   </footer>
 
+  <script src="config-site.js"></script>
   <script src="menu.js"></script>
-  <script src="cadastro.js"></script>
-  <script>
-    document.getElementById('ano').textContent = new Date().getFullYear();
-  </script>
+  <script src="cadastro-rapido.js"></script>
+  <script>document.getElementById('ano').textContent = new Date().getFullYear();</script>
 </body>
 </html>
