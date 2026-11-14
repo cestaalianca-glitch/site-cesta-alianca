@@ -26,6 +26,14 @@ function capturarRef() {
   return /^[A-Za-z0-9_-]{1,24}$/.test(ref) ? ref : "";
 }
 const REF = capturarRef();
+/* Link de renovação (?ref=ALN...&renovacao=1): cliente bom pagador confirma só CPF, cesta e endereço. Vale por 7 dias neste aparelho e só junto com um código ?ref=. */
+function renovacaoAtiva() {
+  try {
+    if (new URLSearchParams(window.location.search).get("renovacao") === "1") localStorage.setItem("aliancaRenovacao", String(Date.now()));
+    const t = +localStorage.getItem("aliancaRenovacao") || 0; return !!REF && t > 0 && Date.now() - t < 7 * 864e5;
+  } catch (e) { return false; }
+}
+const RENOVACAO = renovacaoAtiva();
 
 /* ---------- utilidades ---------- */
 function novoId() {
@@ -92,6 +100,7 @@ async function enviarWebhook(corpo, esperar) {
 }
 /* a planilha antiga continua recebendo (mesmos nomes de campo do cadastro completo) */
 function paraPlanilha(d) {
+  if (d.renovacao) return { nome: d.nome, cpf: mascaraCPF(d.cpf), endereco: d.rua, numero: d.numero, complemento: d.complemento, cep: mascaraCEP(d.cep), bairro: d.bairro, cidade: d.cidade, estado: d.uf || "PR", celular1: mascaraTelefone(d.whatsapp), cesta: d.cesta === "padrao" ? "Padrão" : "Grande", pagamento: "A prazo (promissória 30/60 dias)", comoConheceu: "Renovação", quemIndicou: REF, observacoes: "RENOVAÇÃO RÁPIDA pelo link de recompra (código " + REF + "): sem novos documentos se o histórico estiver limpo.", possivelClienteOpy: "" };
   const trabalho = { inss: "Benefício/Aposentadoria", clt: "Registrado (CLT)", autonomo: "Diarista/Informal" }[d.vinculo];
   const anos = d.tempoMoradiaMeses / 12;
   const obs = ["Cadastro rápido (2 etapas).", "Cesta " + (d.cesta === "padrao" ? "Padrão R$ 530 (2x R$ 265)" : "Grande R$ 640 (2x R$ 320)") + ", 30 e 60 dias.",
@@ -192,7 +201,7 @@ document.addEventListener("DOMContentLoaded", () => {
   });
 
   function corpoEtapa1() {
-    return { etapa: 1, leadId: LEAD_ID, nome: form.nome.value.trim(), whatsapp: digitos(form.whatsapp.value), cep: semCep ? "" : digitos(form.cep.value), cep_nao_informado: semCep, rua: form.rua.value.trim(), bairro: form.bairro.value.trim(), cidade: form.cidade.value.trim(), uf: form.uf.value || "PR", ref: REF, origem: "site", ...origemTrafego() };
+    return { etapa: 1, leadId: LEAD_ID, nome: form.nome.value.trim(), whatsapp: digitos(form.whatsapp.value), cep: semCep ? "" : digitos(form.cep.value), cep_nao_informado: semCep, rua: form.rua.value.trim(), bairro: form.bairro.value.trim(), cidade: form.cidade.value.trim(), uf: form.uf.value || "PR", ref: REF, origem: "site", renovacao: RENOVACAO, ...origemTrafego() };
   }
   /* salva o lead parcial assim que a etapa 1 estiver completa (mesmo que a pessoa não clique em Continuar) */
   let parcialEnviado = false;
@@ -236,32 +245,46 @@ document.addEventListener("DOMContentLoaded", () => {
   }));
   form.cpf.addEventListener("input", () => erro("erro-cpf", ""));
 
+  /* ---- renovação rápida: esconde o que o cliente bom pagador não precisa informar de novo ---- */
+  (function modoRenovacao() {
+    if (!RENOVACAO) return;
+    ["nascimento", "profissao", "renda", "aguaLuz", "filhos", "tempoMoradia"].forEach((n) => { const i = form[n]; if (!i) return; i.required = false; const c = i.closest(".campo"); if (c) c.hidden = true; });
+    ["vinculo", "moradia"].forEach((n) => { const rs = form.querySelectorAll('input[name="' + n + '"]'); rs.forEach((r) => { r.required = false; }); const c = rs[0] && rs[0].closest(".campo"); if (c) c.hidden = true; });
+    ["campo-aluguel", "campo-registro", "campo-gasto-filhos"].forEach((id) => { const e = el(id); if (e) e.hidden = true; });
+    const f2 = el("etapa-2"), aviso = document.createElement("p"); aviso.className = "aviso-regiao ok"; aviso.setAttribute("role", "status");
+    aviso.textContent = "Renovação pré-aprovada: como o seu histórico é bom, é só confirmar o CPF, a cesta e o endereço. Sem holerite.";
+    f2.insertBefore(aviso, f2.children[1] || null); el("btn-enviar").textContent = "Confirmar renovação";
+  })();
+
   /* envio final (etapa 2) */
   form.addEventListener("submit", async (ev) => {
     ev.preventDefault();
     if (form.informacao_extra.value.trim() !== "") return;
     let ok = form.checkValidity(); let primeiro = null;
     if (!validarCPF(form.cpf.value)) { erro("erro-cpf", "CPF inválido. Confira os números."); ok = false; primeiro = form.cpf; }
-    const renda = valorMoeda(form.renda.value), aguaLuz = valorMoeda(form.aguaLuz.value), filhos = parseInt(form.filhos.value, 10);
-    const alugada = form.moradia.value === "alugada", aluguel = alugada ? valorMoeda(form.aluguelValor.value) : 0, gasto = filhos > 0 ? valorMoeda(form.gastoFilhos.value) : 0;
-    if (!(renda > 0)) { ok = false; primeiro = primeiro || form.renda; }
-    if (aguaLuz === null) { ok = false; primeiro = primeiro || form.aguaLuz; }
-    if (alugada && !(aluguel > 0)) { ok = false; primeiro = primeiro || form.aluguelValor; }
-    if (!(filhos >= 0)) { ok = false; primeiro = primeiro || form.filhos; }
-    if (filhos > 0 && gasto === null) { ok = false; primeiro = primeiro || form.gastoFilhos; }
-    const tv = parseInt(form.tempoMoradia.value, 10), meses = form.tempoUnidade.value === "anos" ? tv * 12 : tv;
-    if (!(tv >= 0)) { ok = false; primeiro = primeiro || form.tempoMoradia; }
-    if (form.vinculo.value === "clt" && !(parseInt(form.registroMeses.value, 10) >= 0)) { ok = false; primeiro = primeiro || form.registroMeses; }
+    let renda = null, aguaLuz = null, filhos = null, alugada = false, aluguel = 0, gasto = 0, meses = null;
+    if (!RENOVACAO) {   // cadastro normal: todos os valores reais do crediário; na renovação rápida esses campos nem aparecem
+      renda = valorMoeda(form.renda.value); aguaLuz = valorMoeda(form.aguaLuz.value); filhos = parseInt(form.filhos.value, 10);
+      alugada = form.moradia.value === "alugada"; aluguel = alugada ? valorMoeda(form.aluguelValor.value) : 0; gasto = filhos > 0 ? valorMoeda(form.gastoFilhos.value) : 0;
+      if (!(renda > 0)) { ok = false; primeiro = primeiro || form.renda; }
+      if (aguaLuz === null) { ok = false; primeiro = primeiro || form.aguaLuz; }
+      if (alugada && !(aluguel > 0)) { ok = false; primeiro = primeiro || form.aluguelValor; }
+      if (!(filhos >= 0)) { ok = false; primeiro = primeiro || form.filhos; }
+      if (filhos > 0 && gasto === null) { ok = false; primeiro = primeiro || form.gastoFilhos; }
+      const tv = parseInt(form.tempoMoradia.value, 10); meses = form.tempoUnidade.value === "anos" ? tv * 12 : tv;
+      if (!(tv >= 0)) { ok = false; primeiro = primeiro || form.tempoMoradia; }
+      if (form.vinculo.value === "clt" && !(parseInt(form.registroMeses.value, 10) >= 0)) { ok = false; primeiro = primeiro || form.registroMeses; }
+    }
     if (!ok) { if (primeiro) { primeiro.scrollIntoView({ behavior: "smooth", block: "center" }); primeiro.focus(); } form.reportValidity(); return; }
 
     const d = { etapa: 2, leadId: LEAD_ID, nome: form.nome.value.trim(), whatsapp: digitos(form.whatsapp.value).replace(/^55(?=\d{10,11}$)/, ""), cep: semCep ? "" : digitos(form.cep.value), cep_nao_informado: semCep, rua: form.rua.value.trim(), bairro: form.bairro.value.trim(), cidade: form.cidade.value.trim(), uf: form.uf.value || "PR",
       numero: form.numero.value.trim(), complemento: form.complemento.value.trim(), cpf: digitos(form.cpf.value), nascimento: form.nascimento.value, cesta: form.cesta.value, vinculo: form.vinculo.value, profissao: form.profissao.value.trim(),
-      renda: renda, rendaComprovada: form.rendaComprovada.checked, pagaAluguel: alugada, aluguelValor: aluguel, aguaLuz: aguaLuz, filhos: filhos, gastoFilhos: gasto || 0, tempoMoradiaMeses: meses, registroMeses: form.vinculo.value === "clt" ? parseInt(form.registroMeses.value, 10) : null, ref: REF, origem: "site", ...origemTrafego() };
+      renda: renda, rendaComprovada: form.rendaComprovada.checked, pagaAluguel: alugada, aluguelValor: aluguel, aguaLuz: aguaLuz, filhos: filhos, gastoFilhos: gasto || 0, tempoMoradiaMeses: meses, registroMeses: form.vinculo.value === "clt" ? parseInt(form.registroMeses.value, 10) : null, ref: REF, origem: "site", renovacao: RENOVACAO, ...origemTrafego() };
     const botao = el("btn-enviar"); botao.disabled = true; botao.textContent = "Enviando…"; status.className = "cadastro-status";
     const [web, planilha] = await Promise.all([enviarWebhook(d, 9000), enviarPlanilha(d)]);
     botao.disabled = false; botao.textContent = "Enviar Cadastro";
     if (web.ok || planilha) {
-      el("modal-sucesso-texto").textContent = web.ok ? "Você vai receber uma mensagem da gente no WhatsApp para enviar a foto dos comprovantes." : "Entraremos em contato em breve pelo WhatsApp.";
+      el("modal-sucesso-texto").textContent = web.ok && RENOVACAO ? "Renovação recebida! Se estiver tudo certo com o seu histórico, você recebe a confirmação aqui no WhatsApp em instantes. Se a gente precisar de algum documento, a gente avisa." : web.ok ? "Você vai receber uma mensagem da gente no WhatsApp para enviar a foto dos comprovantes." : "Entraremos em contato em breve pelo WhatsApp.";
       el("modal-sucesso").hidden = false; el("btn-fechar-modal").focus();
       el("btn-fechar-modal").onclick = () => { el("modal-sucesso").hidden = true; window.location.href = "index.html"; };
     } else {

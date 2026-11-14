@@ -10,6 +10,7 @@
     var velho = o.primeiraVisita && Date.now() - Date.parse(o.primeiraVisita) > TRINTA_DIAS;
     if (Object.keys(novo).length && (!o.utm || velho)) { o = { utm: novo, primeiraVisita: new Date().toISOString(), landing: window.location.pathname.slice(0, 80) }; gravar(o); }
     var ref = (p.get("ref") || "").trim(); if (REF.test(ref)) { try { localStorage.setItem("aliancaRef", ref); } catch (e) { /* sem armazenamento */ } }
+    if (p.get("renovacao") === "1" && REF.test(ref)) { try { localStorage.setItem("aliancaRenovacao", String(Date.now())); } catch (e) { /* sem armazenamento */ } }   // link de renovação (vale 7 dias, só com ?ref=)
   } catch (e) { /* sem URLSearchParams */ }
   /* o que vai junto no cadastro */
   window.aliancaOrigem = function () {
