@@ -95,7 +95,7 @@ function paraPlanilha(d) {
   const trabalho = { inss: "Benefício/Aposentadoria", clt: "Registrado (CLT)", autonomo: "Diarista/Informal" }[d.vinculo];
   const anos = d.tempoMoradiaMeses / 12;
   const obs = ["Cadastro rápido (2 etapas).", "Cesta " + (d.cesta === "padrao" ? "Padrão R$ 530 (2x R$ 265)" : "Grande R$ 640 (2x R$ 320)") + ", 30 e 60 dias.",
-    "Renda comprovada: " + (d.rendaComprovada ? "sim" : "não") + ". Água+luz: " + d.aguaLuz.toFixed(2) + ". Filhos/dependentes: " + d.filhos + (d.filhos > 0 ? " (gasto " + d.gastoFilhos.toFixed(2) + ")" : "") + ".", REF ? "Link VIP, padrinho código " + REF + "." : ""].filter(Boolean).join(" ");
+    "Renda comprovada: " + (d.rendaComprovada ? "sim" : "não") + ". Água+luz: " + d.aguaLuz.toFixed(2) + ". Filhos/dependentes: " + d.filhos + (d.filhos > 0 ? " (gasto " + d.gastoFilhos.toFixed(2) + ")" : "") + ".", REF ? "Link VIP, padrinho código " + REF + "." : "", d.cep_nao_informado ? "CEP não informado (endereço à mão: " + d.rua + ", " + d.bairro + ")." : ""].filter(Boolean).join(" ");
   return { nome: d.nome, cpf: mascaraCPF(d.cpf), rg: "", nascimento: d.nascimento || "", estadoCivil: "", pai: "", mae: "", endereco: d.rua, numero: d.numero, complemento: d.complemento, cep: mascaraCEP(d.cep), bairro: d.bairro, cidade: d.cidade, estado: d.uf || "PR",
     situacaoMoradia: d.pagaAluguel ? "Alugada" : "Própria", valorAluguel: d.pagaAluguel ? mascaraMoeda(String(Math.round(d.aluguelValor * 100))) : "", tempoMoradia: anos < 1 ? "Menos de 1 ano" : anos < 3 ? "1 a 3 anos" : anos < 5 ? "3 a 5 anos" : "Mais de 5 anos",
     situacaoTrabalho: trabalho, nomeEmpresa: "", cargoClt: d.vinculo === "clt" ? d.profissao : "", dataAdmissao: "", enderecoEmpresa: "", telefoneEmpresa: "", tipoBeneficio: "", ocupacaoDiarista: d.vinculo === "autonomo" ? d.profissao : "", frequenciaPagamento: "", ocupacaoConjuge: "",
@@ -147,17 +147,59 @@ document.addEventListener("DOMContentLoaded", () => {
       "Ainda não temos rota ativa em " + cidade.replace(/</g, "") + ". Fale com a gente no <a href=\"https://wa.me/" + NUMERO_WHATSAPP + "\" target=\"_blank\" rel=\"noopener\">WhatsApp</a> — talvez a gente atenda a sua região.";
     return ok;
   }
-  form.cep.addEventListener("input", aoDigitarCEP);
+  form.cep.addEventListener("input", () => { if (digitos(form.cep.value).length) voltarAoCep(); aoDigitarCEP(); });
   form.cidade.addEventListener("input", avisoRegiao);
 
+  /* ---- "Não sei meu CEP": cidade da lista + busca pelo nome da rua (ViaCEP) ou endereço à mão (rua sem CEP / área rural) ---- */
+  let semCep = false;   // true = endereço informado à mão: o CEP segue vazio e o servidor usa cidade + bairro
+  function voltarAoCep() { semCep = false; form.cep.required = true; el("rotulo-rua").innerHTML = 'Rua <span class="obrigatorio">*</span>'; }
+  function mostrarBusca(abrir) { el("busca-cep").hidden = !abrir; el("btn-sem-cep").setAttribute("aria-expanded", abrir ? "true" : "false"); }
+  function preencherEndereco(r) {
+    voltarAoCep(); form.cep.value = mascaraCEP(r.cep); ultimoCep = digitos(r.cep); form.rua.value = r.rua; form.bairro.value = r.bairro; form.cidade.value = r.cidade; form.uf.value = r.uf || "PR";
+    el("cep-resultado").hidden = false; el("ajuda-cep").textContent = "Pronto! Confira o endereço abaixo. Se faltar algo, pode completar."; erro("erro-cep", ""); mostrarBusca(false); avisoRegiao();
+  }
+  el("btn-sem-cep").addEventListener("click", () => { const abrir = el("busca-cep").hidden; mostrarBusca(abrir); if (abrir) form.buscaCidade.focus(); });
+  form.buscaCidade.addEventListener("change", () => {
+    const v = form.buscaCidade.value, aviso = el("aviso-regiao"); el("lista-ruas").innerHTML = ""; el("ajuda-busca-rua").textContent = ""; form.buscaRua.value = "";
+    el("campo-busca-rua").hidden = !v || v === "__outra__";
+    if (v === "__outra__") { aviso.hidden = false; aviso.className = "aviso-regiao fora"; aviso.innerHTML = "Ainda não atendemos fora da nossa região (as cidades da lista). Fale com a gente no <a href=\"https://wa.me/" + NUMERO_WHATSAPP + "\" target=\"_blank\" rel=\"noopener\">WhatsApp</a>: talvez a gente atenda o seu bairro ou distrito."; }
+    else { aviso.hidden = true; if (v) form.buscaRua.focus(); }
+  });
+  let timerRua = null, seqRua = 0;
+  form.buscaRua.addEventListener("input", () => {
+    clearTimeout(timerRua); const q = form.buscaRua.value.trim(), lista = el("lista-ruas"), ajuda = el("ajuda-busca-rua"), cidade = form.buscaCidade.value;
+    lista.innerHTML = ""; if (q.length < 3 || !cidade || cidade === "__outra__") { ajuda.textContent = q.length && q.length < 3 ? "Digite pelo menos 3 letras." : ""; return; }
+    ajuda.textContent = "Buscando…";
+    timerRua = setTimeout(async () => {
+      const minha = ++seqRua; let r = null;
+      try { r = await pedir("https://viacep.com.br/ws/PR/" + encodeURIComponent(cidade) + "/" + encodeURIComponent(q) + "/json/", 7000); } catch (e) { /* sem resposta */ }
+      if (minha !== seqRua) return;   // chegou resposta de uma digitação mais antiga: ignora
+      if (!Array.isArray(r) || !r.length) { ajuda.textContent = "Não achamos essa rua. Confira o nome ou toque em \"Minha rua não aparece / Área rural\"."; return; }
+      ajuda.textContent = "Toque na sua rua:";
+      r.slice(0, 20).forEach((x) => {
+        const li = document.createElement("li"); li.setAttribute("role", "option"); li.tabIndex = 0; li.className = "rua-opcao";
+        li.innerHTML = "<strong></strong><span></span>"; li.firstChild.textContent = x.logradouro || "(sem nome)"; li.lastChild.textContent = (x.bairro || "bairro não informado") + " · CEP " + (x.cep || "");
+        const escolher = () => preencherEndereco({ cep: x.cep || "", rua: x.logradouro || "", bairro: x.bairro || "", cidade: x.localidade || cidade, uf: x.uf || "PR" });
+        li.addEventListener("click", escolher); li.addEventListener("keydown", (e) => { if (e.key === "Enter" || e.key === " ") { e.preventDefault(); escolher(); } }); lista.appendChild(li);
+      });
+    }, 400);
+  });
+  el("btn-rua-manual").addEventListener("click", () => {
+    semCep = true; form.cep.value = ""; form.cep.required = false; ultimoCep = ""; erro("erro-cep", "");
+    const c = form.buscaCidade.value; if (c && c !== "__outra__") form.cidade.value = c; form.uf.value = "PR";
+    el("rotulo-rua").innerHTML = 'Rua / Ponto de referência <span class="obrigatorio">*</span>'; el("cep-resultado").hidden = false;
+    el("ajuda-cep").textContent = "Sem CEP, sem problema: preencha o bairro e a rua (ou um ponto de referência, como o nome do sítio ou da estrada)."; mostrarBusca(false); avisoRegiao(); form.rua.focus();
+  });
+
   function corpoEtapa1() {
-    return { etapa: 1, leadId: LEAD_ID, nome: form.nome.value.trim(), whatsapp: digitos(form.whatsapp.value), cep: digitos(form.cep.value), rua: form.rua.value.trim(), bairro: form.bairro.value.trim(), cidade: form.cidade.value.trim(), uf: form.uf.value || "PR", ref: REF, origem: "site", ...origemTrafego() };
+    return { etapa: 1, leadId: LEAD_ID, nome: form.nome.value.trim(), whatsapp: digitos(form.whatsapp.value), cep: semCep ? "" : digitos(form.cep.value), cep_nao_informado: semCep, rua: form.rua.value.trim(), bairro: form.bairro.value.trim(), cidade: form.cidade.value.trim(), uf: form.uf.value || "PR", ref: REF, origem: "site", ...origemTrafego() };
   }
   /* salva o lead parcial assim que a etapa 1 estiver completa (mesmo que a pessoa não clique em Continuar) */
   let parcialEnviado = false;
   async function salvarParcial() {
     const c = corpoEtapa1(); const tel = c.whatsapp.length === 11 && c.whatsapp.startsWith("55") ? c.whatsapp.slice(2) : c.whatsapp;
-    if (parcialEnviado || c.nome.length < 3 || tel.length < 10 || c.cep.length !== 8 || !c.cidade) return;
+    const enderecoOk = c.cep.length === 8 || (semCep && c.bairro.length >= 2 && c.rua.length >= 3);   // sem CEP: precisa de cidade + bairro + rua
+    if (parcialEnviado || c.nome.length < 3 || tel.length < 10 || !enderecoOk || !c.cidade) return;
     parcialEnviado = true; await enviarWebhook(c, 6000);
   }
   ["blur", "change"].forEach((ev) => { form.cidade.addEventListener(ev, salvarParcial); form.nome.addEventListener(ev, salvarParcial); form.whatsapp.addEventListener(ev, salvarParcial); });
@@ -169,9 +211,9 @@ document.addEventListener("DOMContentLoaded", () => {
     if (form.nome.value.trim().length < 3) falha(form.nome);
     let tel = digitos(form.whatsapp.value); if (tel.length > 11 && tel.startsWith("55")) tel = tel.slice(2);
     if (tel.length < 10 || tel.length > 11) falha(form.whatsapp, "erro-whatsapp", "WhatsApp inválido. Digite DDD + número."); else erro("erro-whatsapp", "");
-    if (digitos(form.cep.value).length !== 8) falha(form.cep, "erro-cep", "CEP incompleto. Digite os 8 números."); else erro("erro-cep", "");
-    if (!el("cep-resultado").hidden) { if (!form.rua.value.trim()) falha(form.rua); if (!form.bairro.value.trim()) falha(form.bairro); if (!form.cidade.value.trim()) falha(form.cidade); }
-    else { await aoDigitarCEP(); if (el("cep-resultado").hidden) falha(form.cep, "erro-cep", "Confira o CEP."); }
+    if (!semCep) { if (digitos(form.cep.value).length !== 8) falha(form.cep, "erro-cep", "CEP incompleto. Digite os 8 números ou toque em \"Não sei meu CEP\"."); else erro("erro-cep", ""); } else erro("erro-cep", "");
+    if (!el("cep-resultado").hidden) { if (form.rua.value.trim().length < 3) falha(form.rua); if (!form.bairro.value.trim()) falha(form.bairro); if (!form.cidade.value.trim()) falha(form.cidade); }
+    else { await aoDigitarCEP(); if (el("cep-resultado").hidden) falha(form.cep, "erro-cep", "Confira o CEP ou toque em \"Não sei meu CEP\"."); }
     if (!ok) { if (primeiro) { primeiro.scrollIntoView({ behavior: "smooth", block: "center" }); primeiro.focus(); } return; }
     const botao = el("btn-continuar"); botao.disabled = true; botao.textContent = "Salvando…";
     parcialEnviado = true; await enviarWebhook(corpoEtapa1(), 6000);   // o lead fica salvo mesmo se parar aqui
@@ -212,7 +254,7 @@ document.addEventListener("DOMContentLoaded", () => {
     if (form.vinculo.value === "clt" && !(parseInt(form.registroMeses.value, 10) >= 0)) { ok = false; primeiro = primeiro || form.registroMeses; }
     if (!ok) { if (primeiro) { primeiro.scrollIntoView({ behavior: "smooth", block: "center" }); primeiro.focus(); } form.reportValidity(); return; }
 
-    const d = { etapa: 2, leadId: LEAD_ID, nome: form.nome.value.trim(), whatsapp: digitos(form.whatsapp.value).replace(/^55(?=\d{10,11}$)/, ""), cep: digitos(form.cep.value), rua: form.rua.value.trim(), bairro: form.bairro.value.trim(), cidade: form.cidade.value.trim(), uf: form.uf.value || "PR",
+    const d = { etapa: 2, leadId: LEAD_ID, nome: form.nome.value.trim(), whatsapp: digitos(form.whatsapp.value).replace(/^55(?=\d{10,11}$)/, ""), cep: semCep ? "" : digitos(form.cep.value), cep_nao_informado: semCep, rua: form.rua.value.trim(), bairro: form.bairro.value.trim(), cidade: form.cidade.value.trim(), uf: form.uf.value || "PR",
       numero: form.numero.value.trim(), complemento: form.complemento.value.trim(), cpf: digitos(form.cpf.value), nascimento: form.nascimento.value, cesta: form.cesta.value, vinculo: form.vinculo.value, profissao: form.profissao.value.trim(),
       renda: renda, rendaComprovada: form.rendaComprovada.checked, pagaAluguel: alugada, aluguelValor: aluguel, aguaLuz: aguaLuz, filhos: filhos, gastoFilhos: gasto || 0, tempoMoradiaMeses: meses, registroMeses: form.vinculo.value === "clt" ? parseInt(form.registroMeses.value, 10) : null, ref: REF, origem: "site", ...origemTrafego() };
     const botao = el("btn-enviar"); botao.disabled = true; botao.textContent = "Enviando…"; status.className = "cadastro-status";

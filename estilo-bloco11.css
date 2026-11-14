@@ -93,3 +93,16 @@
   .passos-barra li { font-size: .82rem; padding: 8px 10px; }
 }
 @media (prefers-reduced-motion: reduce) { * { transition: none !important; scroll-behavior: auto !important; } }
+
+/* ---------- "Não sei meu CEP": busca por cidade + rua e endereço à mão ---------- */
+.link-ajuda { display: inline-block; margin-top: 8px; padding: 10px 0; background: none; border: 0; font: inherit; font-weight: 600; color: var(--azul-marinho); text-decoration: underline; text-underline-offset: 3px; cursor: pointer; min-height: 44px; }
+.link-ajuda:hover { color: var(--dourado-escuro); }
+.link-ajuda:focus-visible { outline: 3px solid var(--dourado); outline-offset: 2px; }
+.link-discreto { font-weight: 500; font-size: .9rem; color: var(--cor-texto-claro); }
+.busca-cep { display: flex; flex-direction: column; gap: 14px; padding: 16px; border-left: 3px solid var(--dourado); background: var(--cor-fundo); border-radius: 0 10px 10px 0; }
+.busca-cep[hidden], .busca-cep .campo[hidden] { display: none; }
+.lista-ruas { list-style: none; margin: 8px 0 0; padding: 0; display: flex; flex-direction: column; gap: 8px; max-height: 320px; overflow-y: auto; }
+.rua-opcao { display: flex; flex-direction: column; gap: 2px; padding: 12px 14px; border: 2px solid var(--cor-borda); border-radius: 10px; background: #fff; cursor: pointer; min-height: 48px; }
+.rua-opcao strong { color: var(--azul-marinho); }
+.rua-opcao span { font-size: .88rem; color: var(--cor-texto-claro); }
+.rua-opcao:hover, .rua-opcao:focus-visible { border-color: var(--dourado); background: #fff9e6; outline: none; }

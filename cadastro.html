@@ -73,10 +73,29 @@
             <input type="text" id="cep" name="cep" inputmode="numeric" autocomplete="postal-code" placeholder="00000-000" required>
             <p class="campo-ajuda" id="ajuda-cep">Digite o CEP que a gente preenche a rua, o bairro e a cidade.</p>
             <p class="campo-erro" id="erro-cep" role="alert"></p>
+            <button type="button" class="link-ajuda" id="btn-sem-cep" aria-expanded="false" aria-controls="busca-cep">Não sei meu CEP</button>
+          </div>
+          <div class="busca-cep" id="busca-cep" hidden>
+            <p class="campo-ajuda">Sem problema! Escolha a cidade e digite o nome da rua que a gente acha o CEP.</p>
+            <div class="campo">
+              <label for="buscaCidade">Cidade <span class="obrigatorio">*</span></label>
+              <select id="buscaCidade" name="buscaCidade">
+                <option value="">Selecione a cidade</option>
+                <option>Londrina</option><option>Cambé</option><option>Rolândia</option><option>Jaguapitã</option><option>Ibiporã</option><option>Apucarana</option><option>Arapongas</option><option>Bela Vista do Paraíso</option><option>Sertanópolis</option><option>Florestópolis</option><option>Alvorada do Sul</option><option>Primeiro de Maio</option><option>Porecatu</option><option>Marilândia do Sul</option><option>Tamarana</option><option>São Martinho</option><option>Jataizinho</option><option>Prado Ferreira</option><option>Centenário do Sul</option><option>Guaraci</option><option>Bentópolis</option><option>Califórnia</option>
+                <option value="__outra__">Outra cidade</option>
+              </select>
+            </div>
+            <div class="campo" id="campo-busca-rua" hidden>
+              <label for="buscaRua">Nome da rua <span class="obrigatorio">*</span></label>
+              <input type="text" id="buscaRua" name="buscaRua" autocomplete="off" maxlength="90" placeholder="Ex.: Rua Pernambuco (mínimo 3 letras)">
+              <p class="campo-ajuda" id="ajuda-busca-rua" role="status"></p>
+              <ul class="lista-ruas" id="lista-ruas" role="listbox" aria-label="Ruas encontradas"></ul>
+            </div>
+            <button type="button" class="link-ajuda link-discreto" id="btn-rua-manual">Minha rua não aparece / Área rural</button>
           </div>
           <div class="cep-resultado" id="cep-resultado" hidden>
             <div class="campo">
-              <label for="rua">Rua <span class="obrigatorio">*</span></label>
+              <label for="rua" id="rotulo-rua">Rua <span class="obrigatorio">*</span></label>
               <input type="text" id="rua" name="rua" autocomplete="address-line1" maxlength="90">
             </div>
             <div class="campo-dupla">
@@ -104,7 +123,7 @@
           <div class="campo-dupla">
             <div class="campo">
               <label for="numero">Número da casa <span class="obrigatorio">*</span></label>
-              <input type="text" id="numero" name="numero" autocomplete="address-line2" maxlength="10" required>
+              <input type="text" id="numero" name="numero" autocomplete="address-line2" maxlength="10" placeholder="S/N se não tiver" required>
             </div>
             <div class="campo">
               <label for="complemento">Complemento</label>
