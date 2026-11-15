@@ -33,7 +33,7 @@ Para onde vai o cadastro: o formulário envia para o servidor da empresa (o rece
 - **Publicação**: não passa pela esteira e tem **dois destinos**. Por isso: nunca trabalhar direto no `master`.
   1. **Netlify** (`cestabasicaalianca.netlify.app`): é o endereço oficial, o que os robôs mandam ao cliente e o que o servidor aceita no cadastro. Publicação **à mão**, só depois do merge aprovado: `node .github/ci/montar-site.js` monta `_site/` (cópia limpa, sem `.bak`) e `netlify deploy --prod --dir _site` publica. A conta gratuita tem poucos créditos por mês: juntar as mudanças e publicar uma vez.
   2. **GitHub Pages**: publica sozinho uma cópia do que entra no `master`.
-- **`saude.yml`**, toda segunda-feira: audita branches, esteiras, se o site está no ar e se a Netlify está igual ao `master` (avisa quando falta publicar); apaga as branches já incorporadas ao `master` e paradas há mais de 7 dias.
+- **`saude.yml`**, toda segunda-feira: audita branches, esteiras, se o site está no ar e se os arquivos de código da Netlify estão iguais aos do `master` (avisa quando falta publicar; página HTML não entra na comparação porque a Netlify reescreve aspas e links); apaga as branches já incorporadas ao `master` e paradas há mais de 7 dias.
 - **Ganchos locais** (ligar uma vez por computador: `node .github/ci/instalar-ganchos.js`): a mesma trava roda antes de cada commit e de cada envio.
 - Exceções da trava (telefone da empresa, exemplos de preenchimento, preços): `.github/ci/permitidos.json`, cada uma com o motivo.
 

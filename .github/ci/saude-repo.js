@@ -106,12 +106,15 @@ async function auditar(R, local) {
 
   // só no repositório desta pasta: cópia publicada à mão em outro lugar, frescor dos dados da nuvem, contagens e a trava
   if (local) {
-    for (const e of S.espelhos || []) {   // { nome, url, arquivo }: o que está no ar é igual ao arquivo do repositório?
-      const noAr = await fetch(e.url, { signal: AbortSignal.timeout(20000), redirect: 'follow' }).then(r => r.ok ? r.text() : null, () => null), daqui = tenta(() => fs.readFileSync(path.join(RAIZ, e.arquivo), 'utf8'), null);
-      const limpo = t => t.replace(/\r/g, '').trim();
-      if (noAr == null) alertas.push(`${e.nome}: fora do ar ou sem resposta (${e.url})`);
-      else if (daqui != null && limpo(noAr) !== limpo(daqui)) atencao.push(`${e.nome}: o que está no ar é diferente do repositório (\`${e.arquivo}\`): falta publicar, ou publicaram algo que não está aqui`);
-      else notas.push(`${e.nome}: no ar e igual ao repositório.`);
+    for (const e of S.espelhos || []) {   // { nome, base, arquivos }: o que está no ar é igual ao repositório? Comparar só .js/.css: a hospedagem reescreve o HTML
+      const limpo = t => t.replace(/\r/g, '').trim(), diferentes = []; let semResposta = 0;
+      for (const arq of e.arquivos || []) {
+        const noAr = await fetch(e.base + arq, { signal: AbortSignal.timeout(20000), redirect: 'follow' }).then(r => r.ok ? r.text() : null, () => null), daqui = tenta(() => fs.readFileSync(path.join(RAIZ, arq), 'utf8'), null);
+        if (noAr == null) semResposta++; else if (daqui != null && limpo(noAr) !== limpo(daqui)) diferentes.push(arq);
+      }
+      if (semResposta === (e.arquivos || []).length && semResposta) alertas.push(`${e.nome}: fora do ar ou sem resposta (${e.base})`);
+      else if (diferentes.length) atencao.push(`${e.nome}: o que está no ar é diferente do repositório (${diferentes.map(a => '`' + a + '`').join(', ')}): falta publicar, ou publicaram algo que não está aqui`);
+      else notas.push(`${e.nome}: no ar e igual ao repositório (${(e.arquivos || []).length} arquivo(s) conferido(s)).`);
     }
     const rastreados = tenta(() => cp.execFileSync('git', ['ls-files', '-z'], { cwd: RAIZ, maxBuffer: 256e6 }).toString('utf8').split('\0').filter(Boolean), []);
     for (const c of S.frescor || []) {

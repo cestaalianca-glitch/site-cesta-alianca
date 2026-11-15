@@ -32,8 +32,18 @@
     "espelhos": [
       {
         "nome": "Site na Netlify (endereço que vai nas mensagens ao cliente)",
-        "url": "https://cestabasicaalianca.netlify.app/",
-        "arquivo": "index.html"
+        "base": "https://cestabasicaalianca.netlify.app/",
+        "arquivos": [
+          "cadastro-rapido.js",
+          "cadastro.js",
+          "config-site.js",
+          "origem.js",
+          "simulador.js",
+          "dados-itens.js",
+          "menu.js",
+          "estilo.css",
+          "estilo-bloco11.css"
+        ]
       }
     ]
   }
