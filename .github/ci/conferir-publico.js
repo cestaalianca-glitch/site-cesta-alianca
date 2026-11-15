@@ -53,7 +53,7 @@ function principal() {
   for (const { f } of itens) { if (arqLivres.has(f)) continue; const regra = NOMES.find(([re]) => re.test(f)); if (regra) problemas.push(`${f}: ${regra[1]}`); }
 
   // 3) regras pelo CONTEÚDO (texto até 5 MB; os scripts da própria trava ficam de fora porque trazem os padrões escritos)
-  const TEXTO = /\.(html?|js|mjs|cjs|css|json|txt|md|svg|xml|webmanifest|ya?ml|sh|toml)$/i, IGNORA = /^\.github\/ci\//, GRANDE = 5e6;
+  const TEXTO = /\.(html?|js|mjs|cjs|ts|css|json|txt|md|svg|xml|webmanifest|ya?ml|sh|toml|sql|bat|cmd|vbs|ps1|py|ini|conf)$/i, IGNORA = /^\.github\/ci\//, GRANDE = 5e6;
   const alvo = itens.filter(e => (TEXTO.test(e.f) || !/\.[a-z0-9]+$/i.test(e.f)) && !IGNORA.test(e.f) && e.tam != null && e.tam <= GRANDE && !problemas.some(p => p.startsWith(e.f + ':')));
   const conteudo = new Map();
   if (MODO === 'pasta') for (const e of alvo) { try { conteudo.set(e.f, fs.readFileSync(path.join(RAIZ, e.f), 'utf8')); } catch {} }
