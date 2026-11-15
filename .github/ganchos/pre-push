@@ -3,7 +3,8 @@
 # commit que está saindo. É a última barreira antes de o arquivo deixar este computador: backup (.bak-*), segredo, sessão de WhatsApp,
 # lista/CSV de cliente e dado sensível na linha pública não saem.
 # Ligar nesta cópia do repositório:  node .github/ci/instalar-ganchos.js      Desligar:  node .github/ci/instalar-ganchos.js --desligar
-# Se a trava não conseguir rodar (sem node, erro interno), o envio é LIBERADO com aviso: a esteira do GitHub confere de novo.
+# Tudo certo: não imprime nada. Se a trava não conseguir rodar (sem node, erro interno), o envio é LIBERADO com aviso: a esteira do
+# GitHub confere de novo.
 RAIZ="$(git rev-parse --show-toplevel 2>/dev/null)" || exit 0
 TRAVA=""
 for t in conferir-repo.js conferir-publico.js; do [ -f "$RAIZ/.github/ci/$t" ] && TRAVA="$RAIZ/.github/ci/$t" && break; done
@@ -15,10 +16,14 @@ barrado=0
 while read -r ref_local sha_local ref_remoto sha_remoto; do
   [ -n "$sha_local" ] || continue
   [ "$sha_local" = "$ZEROS" ] && continue   # apagando uma branch remota: nada a conferir
-  node "$TRAVA" --commit "$sha_local"
+  saida="$(node "$TRAVA" --commit "$sha_local" 2>&1)"
   codigo=$?
-  if [ "$codigo" = 1 ]; then barrado=1
-  elif [ "$codigo" != 0 ]; then echo "aviso: a trava não conseguiu rodar em $ref_local (código $codigo); a esteira do GitHub confere de novo" >&2
+  if [ "$codigo" = 1 ]; then
+    printf '%s\n' "$saida" >&2
+    barrado=1
+  elif [ "$codigo" != 0 ]; then
+    printf '%s\n' "$saida" >&2
+    echo "aviso: a trava não conseguiu rodar em $ref_local (código $codigo); a esteira do GitHub confere de novo" >&2
   fi
 done
 if [ "$barrado" = 1 ]; then

@@ -37,7 +37,8 @@ async function auditar(R, local) {
   const info = api(`repos/${R}`, '{private, default_branch, delete_branch_on_merge, archived, open_issues_count}'), principal = info.default_branch, dono = R.split('/')[0];
 
   // proteção do principal
-  const prot = tenta(() => { api(`repos/${R}/branches/${enc(principal)}/protection`, '{url}'); return 'protegida'; }, e => e.http === 404 && /not protected/i.test(e.message) ? 'sem proteção' : /Upgrade to GitHub Pro/i.test(e.message) ? 'indisponível no plano gratuito (repositório privado)' : 'não consegui ler');
+  let prot = tenta(() => { api(`repos/${R}/branches/${enc(principal)}/protection`, '{url}'); return 'protegida'; }, e => e.http === 404 && /not protected/i.test(e.message) ? 'sem proteção' : /Upgrade to GitHub Pro/i.test(e.message) ? 'indisponível no plano gratuito (repositório privado)' : 'não consegui ler');
+  if (prot === 'não consegui ler') prot = tenta(() => api(`repos/${R}/branches/${enc(principal)}`, '{protected}').protected ? 'protegida' : info.private ? 'indisponível no plano gratuito (repositório privado)' : 'sem proteção', 'não consegui ler');   // na esteira o token não lê as regras: vale o campo "protected" da branch
   const regras = tenta(() => linhas(`repos/${R}/rulesets?per_page=100`, '.[] | {name, enforcement}').filter(x => x.enforcement === 'active').length, null);
   notas.push(`Branch principal \`${principal}\`: ${prot}${regras ? ` · ${regras} conjunto(s) de regras ativo(s)` : ''}.`);
   if (prot === 'sem proteção' && !regras) atencao.push(`branch principal \`${principal}\` sem proteção: nada impede force-push ou apagar a branch`);
