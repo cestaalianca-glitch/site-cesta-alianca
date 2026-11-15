@@ -11,8 +11,8 @@ Cliente de baixa renda, no celular, com internet pré-paga. Toda tela precisa se
 
 | Tela ou assunto | Arquivos |
 |---|---|
-| Página inicial (vitrine, preços, chamadas) | `index.html`, `estilo.css`, `estilo-bloco11.css`, `menu.js` |
-| Cadastro rápido em 2 etapas (CEP automático, link de indicação e de renovação) | `cadastro.html`, `cadastro-rapido.js`, `config-site.js` (endereço do servidor que recebe o cadastro) |
+| Página inicial (cartazes das duas cestas, WhatsApp em 1 toque, consulta de entrega pelo CEP e cadastro curto) | `index.html` sozinho: o estilo e o script da página ficam embutidos nele, de propósito, para abrir com um pedido só. O formulário dele é o mesmo do cadastro rápido (`cadastro-rapido.js`) |
+| Cadastro rápido em 2 etapas (CEP automático, link de indicação e de renovação) | `cadastro.html`, `cadastro-rapido.js`, `config-site.js` (endereço do servidor que recebe o cadastro), `estilo.css`, `estilo-bloco11.css`, `menu.js`. Em endereço local (prévia) o `cadastro-rapido.js` não envia nada |
 | Cadastro completo | `cadastro-completo.html`, `cadastro.js` |
 | Monte sua cesta (simulador de trocas) | `montar-cesta.html`, `simulador.js`, `dados-itens.js` (itens e pontos de troca; ponto não é preço) |
 | Origem do tráfego e código de indicação | `origem.js` (guarda `utm_*` e `?ref=`) |
