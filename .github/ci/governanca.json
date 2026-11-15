@@ -1,0 +1,50 @@
+{
+  "_sobre": "Regras de governança deste repositório PÚBLICO (site de vendas), lidas pelos scripts de .github/ci (versão limpa, padrão das esteiras, saúde e limpeza). Mudar aqui é decisão do Gestor: explique no commit.",
+  "site": {
+    "obrigatorios": [
+      "index.html",
+      "cadastro.html"
+    ]
+  },
+  "esteiras": {
+    "acoesPermitidas": [
+      "actions/"
+    ],
+    "producaoSoNoMain": [],
+    "segredoSemTravaDeMain": {}
+  },
+  "limpeza": {
+    "diasMinimos": 7,
+    "branchesProtegidas": [
+      "master"
+    ]
+  },
+  "saude": {
+    "falhasSeguidasAlerta": 2,
+    "agendadoSemRodarDias": 3,
+    "agendadoSemRodarPorArquivo": {
+      "saude.yml": 9
+    },
+    "branchParadaDias": 30,
+    "paginas": [
+      "https://cestaalianca-glitch.github.io/site-cesta-alianca/"
+    ],
+    "espelhos": [
+      {
+        "nome": "Site na Netlify (endereço que vai nas mensagens ao cliente)",
+        "base": "https://cestabasicaalianca.netlify.app/",
+        "arquivos": [
+          "cadastro-rapido.js",
+          "cadastro.js",
+          "config-site.js",
+          "origem.js",
+          "simulador.js",
+          "dados-itens.js",
+          "menu.js",
+          "estilo.css",
+          "estilo-bloco11.css"
+        ]
+      }
+    ]
+  }
+}

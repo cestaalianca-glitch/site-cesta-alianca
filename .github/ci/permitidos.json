@@ -1,0 +1,14 @@
+{
+  "_sobre": "Exceções justificadas da trava da linha pública deste site de vendas. Só entra aqui dado PÚBLICO da própria empresa ou exemplo de preenchimento de campo. Nunca dado de cliente.",
+  "trechos": [
+    { "texto": "(43) 99993-7211", "porque": "WhatsApp comercial da empresa, publicado no site" },
+    { "texto": "(43) 3342-0910", "porque": "telefone fixo da empresa, publicado no site" },
+    { "texto": "000.000.000-00", "porque": "exemplo de preenchimento do campo CPF" },
+    { "texto": "(43) 99999-9999", "porque": "exemplo de preenchimento do campo celular" },
+    { "texto": "(43) 3333-3333", "porque": "exemplo de preenchimento do campo telefone" }
+  ],
+  "tiposLiberados": {
+    "valor em reais": "site de vendas: o preço das cestas e das parcelas é informação pública"
+  },
+  "arquivosLiberados": []
+}
