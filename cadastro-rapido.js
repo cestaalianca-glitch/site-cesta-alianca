@@ -7,6 +7,9 @@ const GOOGLE_SCRIPT_URL = "https://script.google.com/macros/s/AKfycbx2gIS7AuQv4q
 const NUMERO_WHATSAPP = "5543999937211";
 const CFG = window.ALIANCA || {};
 const WEBHOOK_URL = CFG.WEBHOOK_URL || "";
+/* PRÉVIA (15/11/2026): em endereço local (localhost, 127.x, rede de casa 192.168.x / 10.x / 172.16–31.x) ou arquivo aberto do disco, NADA é enviado,
+   nem ao servidor nem à planilha. Serve para testar o site sem criar cadastro de mentira. Nos endereços de verdade (netlify.app, github.io, domínio próprio) nada muda. */
+const PREVIA = window.location.protocol === "file:" || /^(localhost$|127\.|192\.168\.|10\.|172\.(1[6-9]|2\d|3[01])\.|\[::1\]$)/.test(window.location.hostname);
 
 /* Cidades com rota ativa (mesma lista que o servidor usa; o servidor é quem decide de verdade). */
 const CIDADES_ATENDIDAS = ["londrina", "cambe", "rolandia", "jaguapita", "ibipora", "apucarana", "arapongas", "bela vista do paraiso", "sertanopolis", "florestopolis", "alvorada do sul", "primeiro de maio", "porecatu", "marilandia do sul", "tamarana", "sao martinho", "jataizinho", "prado ferreira", "centenario do sul", "guaravera", "guaraci", "bentopolis", "california"];
@@ -91,6 +94,7 @@ async function buscarCEP(cep) {
 
 /* ---------- envio ---------- */
 async function enviarWebhook(corpo, esperar) {
+  if (PREVIA) return { ok: true, previa: true };   // prévia: não manda nada
   if (!WEBHOOK_URL) return { ok: false, semUrl: true };
   const c = new AbortController(); const t = setTimeout(() => c.abort(), esperar || 8000);
   try {
@@ -112,12 +116,14 @@ function paraPlanilha(d) {
     pagamento: "A prazo (promissória 30/60 dias)", horario: "", comoConheceu: REF ? "Indicação" : "Site", quemIndicou: REF, observacoes: obs, possivelClienteOpy: "" };
 }
 async function enviarPlanilha(d) {
+  if (PREVIA) return true;   // prévia: não manda nada
   try { await fetch(GOOGLE_SCRIPT_URL, { method: "POST", mode: "no-cors", headers: { "Content-Type": "text/plain" }, body: JSON.stringify(paraPlanilha(d)) }); return true; } catch (e) { return false; }
 }
 
 document.addEventListener("DOMContentLoaded", () => {
   const form = el("form-rapido"); if (!form) return;
   const status = el("cadastro-status");
+  if (PREVIA) { const faixa = document.createElement("p"); faixa.setAttribute("role", "status"); faixa.style.cssText = "margin:0;padding:8px 14px;background:#0d1b40;color:#fff;font:600 14px/1.35 system-ui,sans-serif;text-align:center"; faixa.textContent = "PRÉVIA: o envio do cadastro está desligado neste endereço. Pode testar à vontade, nada é enviado."; document.body.insertBefore(faixa, document.body.firstChild); }
   /* ?cesta=padrao|grande (vem dos botões do site) já deixa a cesta marcada */
   try { const c = new URLSearchParams(window.location.search).get("cesta"); const r = c && form.querySelector('input[name="cesta"][value="' + (c === "padrao" ? "padrao" : c === "grande" ? "grande" : "") + '"]'); if (r) r.checked = true; } catch (e) { /* sem parâmetro */ }
   mascarar(form.whatsapp, mascaraTelefone); mascarar(form.cep, mascaraCEP); mascarar(form.cpf, mascaraCPF);
@@ -128,7 +134,7 @@ document.addEventListener("DOMContentLoaded", () => {
     el("barra-1").classList.toggle("ativo", n === 1); el("barra-2").classList.toggle("ativo", n === 2); el("barra-1").classList.toggle("feito", n === 2);
     if (n === 1) el("barra-1").setAttribute("aria-current", "step"); else el("barra-1").removeAttribute("aria-current");
     if (n === 2) el("barra-2").setAttribute("aria-current", "step"); else el("barra-2").removeAttribute("aria-current");
-    window.scrollTo({ top: 0, behavior: "smooth" });
+    form.scrollIntoView({ behavior: "smooth", block: "start" });   // volta para o começo do formulário (na página inicial ele fica no meio da página)
   }
 
   /* CEP automático */
@@ -284,7 +290,7 @@ document.addEventListener("DOMContentLoaded", () => {
     const [web, planilha] = await Promise.all([enviarWebhook(d, 9000), enviarPlanilha(d)]);
     botao.disabled = false; botao.textContent = "Enviar Cadastro";
     if (web.ok || planilha) {
-      el("modal-sucesso-texto").textContent = web.ok && RENOVACAO ? "Renovação recebida! Se estiver tudo certo com o seu histórico, você recebe a confirmação aqui no WhatsApp em instantes. Se a gente precisar de algum documento, a gente avisa." : web.ok ? "Você vai receber uma mensagem da gente no WhatsApp para enviar a foto dos comprovantes." : "Entraremos em contato em breve pelo WhatsApp.";
+      el("modal-sucesso-texto").textContent = web.previa ? "PRÉVIA: nada foi enviado. No site de verdade, o cliente recebe a nossa mensagem no WhatsApp para mandar os comprovantes." : web.ok && RENOVACAO ? "Renovação recebida! Se estiver tudo certo com o seu histórico, você recebe a confirmação aqui no WhatsApp em instantes. Se a gente precisar de algum documento, a gente avisa." : web.ok ? "Você vai receber uma mensagem da gente no WhatsApp para enviar a foto dos comprovantes." : "Entraremos em contato em breve pelo WhatsApp.";
       el("modal-sucesso").hidden = false; el("btn-fechar-modal").focus();
       el("btn-fechar-modal").onclick = () => { el("modal-sucesso").hidden = true; window.location.href = "index.html"; };
     } else {
