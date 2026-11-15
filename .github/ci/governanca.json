@@ -28,6 +28,13 @@
     "branchParadaDias": 30,
     "paginas": [
       "https://cestaalianca-glitch.github.io/site-cesta-alianca/"
+    ],
+    "espelhos": [
+      {
+        "nome": "Site na Netlify (endereço que vai nas mensagens ao cliente)",
+        "url": "https://cestabasicaalianca.netlify.app/",
+        "arquivo": "index.html"
+      }
     ]
   }
 }

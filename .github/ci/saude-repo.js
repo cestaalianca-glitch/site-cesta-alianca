@@ -104,8 +104,15 @@ async function auditar(R, local) {
   // páginas no ar
   for (const u of S.paginas || []) { const st = await fetch(u, { signal: AbortSignal.timeout(20000), redirect: 'follow' }).then(r => r.status, () => 0); if (st === 200) notas.push(`Página no ar: ${u}`); else alertas.push(`página fora do ar (${st || 'sem resposta'}): ${u}`); }
 
-  // só no repositório desta pasta: frescor dos dados da nuvem, contagens e a trava
+  // só no repositório desta pasta: cópia publicada à mão em outro lugar, frescor dos dados da nuvem, contagens e a trava
   if (local) {
+    for (const e of S.espelhos || []) {   // { nome, url, arquivo }: o que está no ar é igual ao arquivo do repositório?
+      const noAr = await fetch(e.url, { signal: AbortSignal.timeout(20000), redirect: 'follow' }).then(r => r.ok ? r.text() : null, () => null), daqui = tenta(() => fs.readFileSync(path.join(RAIZ, e.arquivo), 'utf8'), null);
+      const limpo = t => t.replace(/\r/g, '').trim();
+      if (noAr == null) alertas.push(`${e.nome}: fora do ar ou sem resposta (${e.url})`);
+      else if (daqui != null && limpo(noAr) !== limpo(daqui)) atencao.push(`${e.nome}: o que está no ar é diferente do repositório (\`${e.arquivo}\`): falta publicar, ou publicaram algo que não está aqui`);
+      else notas.push(`${e.nome}: no ar e igual ao repositório.`);
+    }
     const rastreados = tenta(() => cp.execFileSync('git', ['ls-files', '-z'], { cwd: RAIZ, maxBuffer: 256e6 }).toString('utf8').split('\0').filter(Boolean), []);
     for (const c of S.frescor || []) {
       const data = c.arquivoComData ? tenta(() => (/\d{4}-\d{2}-\d{2}/.exec(fs.readFileSync(path.join(RAIZ, c.arquivoComData), 'utf8')) || [])[0], null) : rastreados.map(f => (new RegExp('^' + c.padrao + '$').exec(f) || [])[1]).filter(Boolean).sort().pop();

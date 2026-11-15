@@ -3,8 +3,9 @@
 #      nenhuma página (telefone da própria empresa, exemplos de preenchimento e preços são exceções declaradas em .github/ci/permitidos.json);
 #   2) sintaxe: todo .js e todo <script> embutido nas páginas precisa compilar; padrão das esteiras;
 #   3) versão limpa (_site/, só páginas) guardada como prévia baixável: artefato "previa-site-<commit>", 14 dias.
-# A PUBLICAÇÃO NÃO PASSA POR AQUI: o GitHub Pages deste repositório publica sozinho o que entra no master (Settings › Pages, "Deploy from
-# a branch"). Por isso branch feat/... e pull request nunca publicam: só o merge no master, aprovado pelo Gestor, vai para o ar.
+# A PUBLICAÇÃO NÃO PASSA POR AQUI. O endereço oficial (Netlify, o que vai nas mensagens ao cliente) é publicado à mão, de uma cópia limpa,
+# depois do merge aprovado; o GitHub Pages publica sozinho uma cópia do que entra no master. Por isso branch feat/... e pull request
+# nunca publicam nada.
 # Pelo botão "Run workflow", o campo "ramo" monta a prévia de uma branch criada antes desta esteira existir (ela é conferida com as
 # regras do master).
 name: Site — conferir e prévia
@@ -77,5 +78,5 @@ jobs:
             echo "### Prévia do site: \`${RAMO}\` (commit ${SHA:0:7})"
             echo "- Baixe o artefato **previa-site-${SHA}** (no fim desta página, em Artifacts), descompacte e abra \`index.html\` no navegador."
             echo "- Para testar no celular: na pasta descompactada, rode \`npx --yes http-server -p 8080 -c-1 .\` e abra o endereço do computador na mesma rede."
-            echo "- Esta esteira **não publica nada**. O site só muda quando a branch entra no \`master\` (merge aprovado pelo Gestor): aí o GitHub Pages publica sozinho."
+            echo "- Esta esteira **não publica nada**. O site só muda depois do merge no \`master\` aprovado pelo Gestor: o GitHub Pages publica a cópia sozinho e a Netlify (endereço que o cliente recebe) é publicada à mão, de cópia limpa."
           } >> "$GITHUB_STEP_SUMMARY"
