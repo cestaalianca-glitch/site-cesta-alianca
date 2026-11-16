@@ -1202,3 +1202,11 @@ h1, h2, h3 {
   .nav { background: #ffffff; border-bottom: 1px solid var(--cor-borda); box-shadow: 0 12px 20px rgba(13, 27, 64, 0.12); }
   .nav a { border: 0; border-bottom: 1px solid var(--cor-borda); border-radius: 0; }
 }
+/* Tema claro: quadro de resumo do Monte a sua cesta (era azul-marinho) e véu do modal mais leve */
+.montador-resumo { background: #ffffff; color: var(--cor-texto); border: 1px solid var(--cor-borda); border-top: 4px solid var(--dourado); }
+.montador-resumo h2 { color: var(--azul-marinho); }
+.resumo-lista li { border-bottom-color: var(--cor-borda); }
+.resumo-vazio, .resumo-aviso { color: var(--cor-texto-claro); }
+.resumo-comparativo { color: var(--azul-marinho); font-weight: 600; }
+.resumo-botoes .btn-secundario { color: var(--azul-marinho); border-color: var(--azul-marinho); }
+.modal-veu { background: rgba(13, 27, 64, 0.35); }
