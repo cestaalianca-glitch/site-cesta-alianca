@@ -1189,3 +1189,16 @@ h1, h2, h3 {
   .montador-opcoes { flex-direction: column; align-items: stretch; }
   .montador-opcoes .btn { text-align: center; }
 }
+
+/* ===== Tema claro (16/11): cabeçalho, menu e rodapé claros, iguais aos da página inicial ===== */
+.header { background: #ffffff; border-top: 5px solid var(--dourado); border-bottom: 1px solid var(--cor-borda); }
+.logo { color: var(--azul-marinho); }
+.logo img { border-radius: 9px; }
+.nav a { color: var(--azul-marinho); border-color: var(--cor-borda); }
+.nav a:hover { color: var(--azul-marinho); border-color: var(--dourado); background: #fff9e6; }
+.nav-toggle span { background: var(--azul-marinho); }
+.footer { background: var(--cor-fundo-alt); color: var(--cor-texto-claro); border-top: 1px solid var(--cor-borda); }
+@media (max-width: 1080px) {
+  .nav { background: #ffffff; border-bottom: 1px solid var(--cor-borda); box-shadow: 0 12px 20px rgba(13, 27, 64, 0.12); }
+  .nav a { border: 0; border-bottom: 1px solid var(--cor-borda); border-radius: 0; }
+}

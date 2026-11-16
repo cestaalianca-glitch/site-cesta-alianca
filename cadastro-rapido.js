@@ -107,7 +107,7 @@ function paraPlanilha(d) {
   if (d.renovacao) return { nome: d.nome, cpf: mascaraCPF(d.cpf), endereco: d.rua, numero: d.numero, complemento: d.complemento, cep: mascaraCEP(d.cep), bairro: d.bairro, cidade: d.cidade, estado: d.uf || "PR", celular1: mascaraTelefone(d.whatsapp), cesta: d.cesta === "padrao" ? "Padrão" : "Grande", pagamento: "A prazo (promissória 30/60 dias)", comoConheceu: "Renovação", quemIndicou: REF, observacoes: "RENOVAÇÃO RÁPIDA pelo link de recompra (código " + REF + "): sem novos documentos se o histórico estiver limpo.", possivelClienteOpy: "" };
   const trabalho = { inss: "Benefício/Aposentadoria", clt: "Registrado (CLT)", autonomo: "Diarista/Informal" }[d.vinculo];
   const anos = d.tempoMoradiaMeses / 12;
-  const obs = ["Cadastro rápido (2 etapas).", "Cesta " + (d.cesta === "padrao" ? "Padrão R$ 530 (2x R$ 265)" : "Grande R$ 640 (2x R$ 320)") + ", 30 e 60 dias.",
+  const obs = ["Cadastro rápido (2 etapas).", "Cesta " + (d.cesta === "padrao" ? "Padrão" : "Grande") + ".",
     "Renda comprovada: " + (d.rendaComprovada ? "sim" : "não") + ". Água+luz: " + d.aguaLuz.toFixed(2) + ". Filhos/dependentes: " + d.filhos + (d.filhos > 0 ? " (gasto " + d.gastoFilhos.toFixed(2) + ")" : "") + ".", REF ? "Link VIP, padrinho código " + REF + "." : "", d.cep_nao_informado ? "CEP não informado (endereço à mão: " + d.rua + ", " + d.bairro + ")." : ""].filter(Boolean).join(" ");
   return { nome: d.nome, cpf: mascaraCPF(d.cpf), rg: "", nascimento: d.nascimento || "", estadoCivil: "", pai: "", mae: "", endereco: d.rua, numero: d.numero, complemento: d.complemento, cep: mascaraCEP(d.cep), bairro: d.bairro, cidade: d.cidade, estado: d.uf || "PR",
     situacaoMoradia: d.pagaAluguel ? "Alugada" : "Própria", valorAluguel: d.pagaAluguel ? mascaraMoeda(String(Math.round(d.aluguelValor * 100))) : "", tempoMoradia: anos < 1 ? "Menos de 1 ano" : anos < 3 ? "1 a 3 anos" : anos < 5 ? "3 a 5 anos" : "Mais de 5 anos",
@@ -123,7 +123,7 @@ async function enviarPlanilha(d) {
 document.addEventListener("DOMContentLoaded", () => {
   const form = el("form-rapido"); if (!form) return;
   const status = el("cadastro-status");
-  if (PREVIA) { const faixa = document.createElement("p"); faixa.setAttribute("role", "status"); faixa.style.cssText = "margin:0;padding:8px 14px;background:#0d1b40;color:#fff;font:600 14px/1.35 system-ui,sans-serif;text-align:center"; faixa.textContent = "PRÉVIA: o envio do cadastro está desligado neste endereço. Pode testar à vontade, nada é enviado."; document.body.insertBefore(faixa, document.body.firstChild); }
+  if (PREVIA) { const faixa = document.createElement("p"); faixa.setAttribute("role", "status"); faixa.style.cssText = "margin:0;padding:8px 14px;background:#fff6d6;color:#0d1b40;border-bottom:1px solid #e4e1d8;font:600 14px/1.35 system-ui,sans-serif;text-align:center"; faixa.textContent = "PRÉVIA: o envio do cadastro está desligado neste endereço. Pode testar à vontade, nada é enviado."; document.body.insertBefore(faixa, document.body.firstChild); }
   /* ?cesta=padrao|grande (vem dos botões do site) já deixa a cesta marcada */
   try { const c = new URLSearchParams(window.location.search).get("cesta"); const r = c && form.querySelector('input[name="cesta"][value="' + (c === "padrao" ? "padrao" : c === "grande" ? "grande" : "") + '"]'); if (r) r.checked = true; } catch (e) { /* sem parâmetro */ }
   mascarar(form.whatsapp, mascaraTelefone); mascarar(form.cep, mascaraCEP); mascarar(form.cpf, mascaraCPF);
@@ -294,7 +294,7 @@ document.addEventListener("DOMContentLoaded", () => {
       el("modal-sucesso").hidden = false; el("btn-fechar-modal").focus();
       el("btn-fechar-modal").onclick = () => { el("modal-sucesso").hidden = true; window.location.href = "index.html"; };
     } else {
-      const msg = "Olá! Quero fazer meu cadastro:\nNome: " + d.nome + "\nCPF: " + mascaraCPF(d.cpf) + "\nEndereço: " + d.rua + ", " + d.numero + " - " + d.bairro + ", " + d.cidade + "\nCesta: " + (d.cesta === "padrao" ? "Padrão R$ 530 (2x R$ 265)" : "Grande R$ 640 (2x R$ 320)");
+      const msg = "Olá! Quero fazer meu cadastro:\nNome: " + d.nome + "\nCPF: " + mascaraCPF(d.cpf) + "\nEndereço: " + d.rua + ", " + d.numero + " - " + d.bairro + ", " + d.cidade + "\nCesta: " + (d.cesta === "padrao" ? "Padrão" : "Grande");
       status.className = "cadastro-status status-erro";
       status.innerHTML = "Não conseguimos enviar agora. <a class=\"btn btn-whatsapp\" href=\"https://wa.me/" + NUMERO_WHATSAPP + "?text=" + encodeURIComponent(msg) + "\" target=\"_blank\" rel=\"noopener\">Enviar pelo WhatsApp</a>";
     }

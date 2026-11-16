@@ -1,17 +1,18 @@
 # site-cesta-alianca — site de vendas do cliente (repositório PÚBLICO, no ar em dois endereços)
 
-Responder sempre em português. Este repositório é **público** e o `master` vai para o ar (ver "Publicação"): nunca colocar dado de cliente (nome, CPF, telefone, endereço, pedido), senha, token ou chave de serviço em nenhum arquivo. Preço das cestas e telefone da própria empresa são públicos. Nunca escrever o nome do sistema de gestão interno em texto que o cliente lê.
+Responder sempre em português. Este repositório é **público** e o `master` vai para o ar (ver "Publicação"): nunca colocar dado de cliente (nome, CPF, telefone, endereço, pedido), senha, token ou chave de serviço em nenhum arquivo. O telefone da própria empresa é público. **Preço não aparece no site** (decisão do Gestor, 16/11/2026): nenhuma página, metadado, botão ou mensagem pronta traz valor, parcela ou prazo de pagamento; as condições são tratadas no WhatsApp. Os campos em que o próprio cliente digita renda e aluguel no cadastro continuam com a máscara de moeda (não são preço). Nunca escrever o nome do sistema de gestão interno em texto que o cliente lê.
 
 Este manual fica em `.claude/` de propósito: na raiz ele seria publicado junto com o site.
 
 ## Para quem é o site
-Cliente de baixa renda, no celular, com internet pré-paga. Toda tela precisa ser leve (sem biblioteca pesada, imagem comprimida), ter texto simples, mostrar o valor da parcela bem claro e ter um botão grande de WhatsApp. Antes de aceitar uma mudança, olhar o tamanho da versão limpa que a esteira mostra.
+Cliente de baixa renda, no celular, com internet pré-paga. Toda tela precisa ser leve (sem biblioteca pesada, imagem comprimida), ter fundo claro, texto curto e simples e botões grandes de WhatsApp (sem preço: ver acima). Antes de aceitar uma mudança, olhar o tamanho da versão limpa que a esteira mostra.
 
 ## Mapa: o que mora onde (abra só o arquivo da tela em que vai mexer)
 
 | Tela ou assunto | Arquivos |
 |---|---|
-| Página inicial (cartazes das duas cestas, WhatsApp em 1 toque, consulta de entrega pelo CEP e cadastro curto) | `index.html` sozinho: o estilo e o script da página ficam embutidos nele, de propósito, para abrir com um pedido só. O formulário dele é o mesmo do cadastro rápido (`cadastro-rapido.js`) |
+| Página inicial (vitrine clara das duas cestas, sem preço: foto, itens principais, "Pedir esta cesta pelo WhatsApp" e "Consultar condições no WhatsApp"; como funciona a entrega; cidades atendidas; botão flutuante de WhatsApp) | `index.html` sozinho: o estilo e o script da página ficam embutidos nele, de propósito, para abrir com um pedido só. Não tem formulário: o cadastro fica em `cadastro.html`. A mensagem pronta do WhatsApp leva o nome da cesta e, se houver, o código de indicação |
+| Cabeçalho, menu e rodapé claros das outras páginas | bloco "Tema claro" no fim do `estilo.css` |
 | Cadastro rápido em 2 etapas (CEP automático, link de indicação e de renovação) | `cadastro.html`, `cadastro-rapido.js`, `config-site.js` (endereço do servidor que recebe o cadastro), `estilo.css`, `estilo-bloco11.css`, `menu.js`. Em endereço local (prévia) o `cadastro-rapido.js` não envia nada |
 | Cadastro completo | `cadastro-completo.html`, `cadastro.js` |
 | Monte sua cesta (simulador de trocas) | `montar-cesta.html`, `simulador.js`, `dados-itens.js` (itens e pontos de troca; ponto não é preço) |

@@ -3,495 +3,243 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<title>Cesta Básica Aliança: cesta básica em 2x, entregue na sua porta</title>
-<meta name="description" content="Cesta básica em Londrina e região desde 2004. Cesta Padrão em 2x de R$ 265 e Cesta Grande em 2x de R$ 320, em 30 e 60 dias. Entrega grátis na sua porta.">
-<meta property="og:title" content="Cesta Básica Aliança: cesta em 2x, direto na sua porta">
-<meta property="og:description" content="Padrão em 2x de R$ 265. Grande em 2x de R$ 320. Parcelas em 30 e 60 dias. Londrina e região desde 2004.">
-<meta name="theme-color" content="#0d1b40">
+<meta name="color-scheme" content="only light">
+<title>Cesta Básica Aliança: cesta básica entregue na sua porta</title>
+<meta name="description" content="Cesta básica em Londrina e região desde 2004. Cesta Padrão e Cesta Grande, com alimentos, higiene e limpeza, entregues na sua porta. Peça pelo WhatsApp.">
+<meta property="og:title" content="Cesta Básica Aliança: cesta básica entregue na sua porta">
+<meta property="og:description" content="Cesta Padrão e Cesta Grande, com alimentos, higiene e limpeza. Londrina e região desde 2004. Peça pelo WhatsApp.">
+<meta name="theme-color" content="#ffffff">
 <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Crect width='32' height='32' rx='7' fill='%230d1b40'/%3E%3Ccircle cx='12.5' cy='16' r='6' fill='none' stroke='%23f2b705' stroke-width='2.5'/%3E%3Ccircle cx='19.5' cy='16' r='6' fill='none' stroke='%23f2b705' stroke-width='2.5'/%3E%3C/svg%3E">
-<!-- Página leve de propósito (cliente no 4G pré-pago): sem fonte externa, sem biblioteca, estilo embutido, fotos só quando a pessoa chega nelas. -->
+<!-- Vitrine do site: fundo claro, sem preço em lugar nenhum (as condições são tratadas no WhatsApp).
+     Página leve de propósito (cliente no 4G pré-pago): sem fonte externa, sem biblioteca, estilo embutido. -->
 <style>
-:root{--navy:#0d1b40;--navy-2:#17285f;--ouro:#f2b705;--ouro-claro:#fff4cc;--verde:#0b7a3b;--verde-2:#096430;--papel:#fff;--tinta:#0d1b40;--tinta-2:#46527a;--linha:rgba(13,27,64,.16);--erro:#b3261e;--ok:#0b6b34;
---sans:system-ui,-apple-system,"Segoe UI",Roboto,"Helvetica Neue",Arial,sans-serif;
---cartaz:"Avenir Next Condensed","Roboto Condensed","sans-serif-condensed","Bahnschrift","Arial Narrow","Helvetica Neue",Arial,sans-serif}
+:root{--marinho:#0d1b40;--ouro:#f2b705;--ouro-claro:#fff6d6;--verde:#0b7a3b;--verde-2:#096430;--texto:#1f2430;--texto-2:#5b6270;--linha:#e4e1d8;--fundo:#fff;--fundo-2:#f7f5ef}
 *,*::before,*::after{box-sizing:border-box}
-html{-webkit-text-size-adjust:100%;scroll-behavior:smooth}
-body{margin:0;font-family:var(--sans);font-size:17px;line-height:1.5;color:var(--tinta);background:var(--papel);-webkit-font-smoothing:antialiased}
+html{-webkit-text-size-adjust:100%;color-scheme:only light}
+body{margin:0;font:400 17px/1.5 system-ui,-apple-system,"Segoe UI",Roboto,"Helvetica Neue",Arial,sans-serif;color:var(--texto);background:var(--fundo);border-top:5px solid var(--ouro)}
+img{display:block;max-width:100%;height:auto}
+a{color:var(--marinho)}
 h1,h2,h3,p,ul,ol{margin:0}
+h1,h2,h3{color:var(--marinho);line-height:1.15;letter-spacing:-.01em}
 ul,ol{padding:0;list-style:none}
-a{color:inherit}
-img{max-width:100%;height:auto;display:block}
-button,input,select{font:inherit;color:inherit}
-[hidden]{display:none!important}
-.so-leitor{position:absolute;width:1px;height:1px;overflow:hidden;clip:rect(0 0 0 0);white-space:nowrap}
-:focus-visible{outline:3px solid var(--navy);outline-offset:3px;border-radius:6px}
-.dentro{max-width:1040px;margin:0 auto;padding:0 18px}
+:focus-visible{outline:3px solid var(--marinho);outline-offset:3px;border-radius:6px}
+.dentro{width:100%;max-width:1080px;margin:0 auto;padding-left:16px;padding-right:16px}
+.icone{width:24px;height:24px;flex:none}
 
-/* topo */
-.topo{display:flex;align-items:center;justify-content:space-between;gap:12px;min-height:56px}
-.marca{display:flex;align-items:center;gap:10px;font-weight:800;letter-spacing:-.02em;text-decoration:none;line-height:1.1}
-.marca svg{flex:none}
-.topo small{font-size:.82rem;color:var(--tinta-2);white-space:nowrap}
+.topo{border-bottom:1px solid var(--linha)}
+.topo-dentro{display:flex;align-items:center;justify-content:space-between;gap:12px;padding-top:10px;padding-bottom:10px}
+.marca{display:flex;align-items:center;gap:10px;color:var(--marinho);font-weight:800;font-size:1.05rem;line-height:1.1;text-decoration:none}
+.marca svg{width:42px;height:42px;flex:none}
+.btn-topo{display:inline-flex;align-items:center;gap:8px;min-height:44px;padding:8px 14px;border:2px solid var(--verde);border-radius:999px;color:var(--verde);font-weight:700;font-size:.95rem;text-decoration:none}
+.btn-topo .icone{width:20px;height:20px}
 
-/* abertura e os dois cartazes de oferta */
-.abertura{padding-top:18px;padding-bottom:8px}
-h1{font-size:clamp(2rem,8.6vw,3.4rem);line-height:1.02;letter-spacing:-.04em;font-weight:900;text-wrap:balance;max-width:14ch}
-.abertura>p{margin-top:12px;font-size:1.08rem;color:var(--tinta-2);max-width:34ch}
-.cartazes{display:grid;gap:22px;margin-top:26px}
-.cartaz{position:relative;background:var(--ouro);border-radius:10px;padding:20px 18px 18px}
-.cartaz h2{font-size:1.35rem;font-weight:900;letter-spacing:-.02em;line-height:1.1}
-.cartaz .itens{font-size:.95rem;font-weight:600;margin-top:2px}
-.preco{display:flex;align-items:flex-start;gap:8px;margin-top:10px;font-family:var(--cartaz);font-stretch:condensed;font-weight:900;line-height:.86}
-.preco .vezes{font-size:1.9rem;line-height:1;padding-top:.22em;letter-spacing:-.01em}
-.preco .rs{font-size:1.9rem;line-height:1;padding-top:.22em}
-.preco .num{font-size:clamp(5.4rem,31vw,8.2rem);letter-spacing:-.035em}
-.cartaz .miudo{margin-top:10px;font-size:1rem;font-weight:600;line-height:1.35}
-.selo{position:absolute;top:-13px;right:12px;background:var(--navy);color:#fff;font-weight:800;font-size:.86rem;line-height:1.1;padding:8px 12px;border-radius:999px;transform:rotate(4deg)}
-.btn{display:inline-flex;align-items:center;justify-content:center;gap:10px;min-height:54px;padding:0 22px;border:0;border-radius:12px;background:var(--navy);color:#fff;font-weight:800;font-size:1.05rem;text-decoration:none;cursor:pointer;text-align:center}
-.btn:active{transform:translateY(1px)}
-.cartaz .btn{width:100%;margin-top:14px}
-.cartaz.escolhida{box-shadow:0 0 0 4px var(--navy)}
-.cartaz.escolhida .btn{background:#fff;color:var(--navy)}
+.abre{padding-top:22px;padding-bottom:4px}
+.abre h1{font-size:clamp(1.75rem,7.2vw,2.75rem);font-weight:800}
+.abre p{margin-top:8px;color:var(--texto-2);font-size:1.05rem}
 
-/* pedir: WhatsApp em 1 toque e o formulário curto, lado a lado em tela larga */
-.pedir{padding-top:34px;padding-bottom:10px;scroll-margin-top:10px}
-.pedir h2,.faixa h2,.claro h2{font-size:1.6rem;font-weight:900;letter-spacing:-.03em;line-height:1.1}
-.duas{display:grid;gap:22px;margin-top:16px}
-.btn-zap,.btn-whatsapp{display:flex;align-items:center;justify-content:center;gap:14px;width:100%;min-height:76px;padding:12px 18px;border-radius:16px;background:var(--verde);color:#fff;font-weight:900;font-size:1.3rem;line-height:1.15;letter-spacing:-.01em;text-decoration:none;text-align:left;box-shadow:0 6px 0 var(--verde-2)}
-.btn-zap:active{transform:translateY(3px);box-shadow:0 3px 0 var(--verde-2)}
-.btn-zap svg{flex:none}
-.btn-whatsapp{min-height:54px;font-size:1.05rem;box-shadow:none;margin-top:10px}
-.zap-nota{margin-top:16px;font-size:1rem;color:var(--tinta-2)}
-.zap-lista{margin-top:12px;display:grid;gap:8px;font-size:1rem}
-.zap-lista li{padding-left:26px;position:relative}
-.zap-lista li::before{content:"";position:absolute;left:2px;top:.45em;width:12px;height:7px;border-left:3px solid var(--verde);border-bottom:3px solid var(--verde);transform:rotate(-45deg)}
+.cestas{display:grid;gap:20px;padding-top:18px}
+.cesta{display:flex;flex-direction:column;border:1px solid var(--linha);border-radius:16px;background:#fff;overflow:hidden;box-shadow:0 1px 3px rgba(13,27,64,.07)}
+.foto{aspect-ratio:4/3;background:#fff;border-bottom:1px solid var(--linha)}
+.foto img{width:100%;height:100%;object-fit:contain}
+.titulo{display:flex;align-items:center;justify-content:space-between;flex-wrap:wrap;gap:8px 12px}
+.etiqueta{padding:6px 12px;border-radius:999px;background:var(--ouro);color:var(--marinho);font-weight:800;font-size:.95rem;line-height:1.2}
+.corpo{display:flex;flex-direction:column;gap:14px;flex:1;padding:16px}
+.cesta h2{font-size:1.6rem;font-weight:800}
+.principais{display:grid;gap:7px}
+.principais li{position:relative;padding-left:30px}
+.principais li::before{content:"";position:absolute;left:0;top:.15em;width:21px;height:21px;border-radius:50%;background:var(--ouro-claro) url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='%230d1b40' stroke-width='3' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpath d='m6.5 12.5 3.5 3.5 7.5-8'/%3E%3C/svg%3E") center/15px no-repeat}
+.principais b{color:var(--marinho)}
+.completa summary{display:inline-flex;align-items:center;gap:6px;min-height:44px;color:var(--marinho);font-weight:700;text-decoration:underline;text-underline-offset:3px;cursor:pointer;list-style:none}
+.completa summary::-webkit-details-marker{display:none}
+.completa summary::after{content:"";width:9px;height:9px;border-right:2.5px solid currentColor;border-bottom:2.5px solid currentColor;transform:rotate(45deg) translateY(-2px)}
+.completa[open] summary::after{transform:rotate(-135deg) translateY(-2px)}
+.completa ul{columns:2;column-gap:18px;margin-top:6px;padding-top:10px;border-top:1px solid var(--linha);font-size:.95rem;color:var(--texto-2)}
+.completa li{break-inside:avoid;padding:2px 0}
+.completa li b{color:var(--texto)}
+.botoes{display:grid;gap:10px;margin-top:auto}
+.btn{display:flex;align-items:center;justify-content:center;gap:10px;min-height:56px;padding:12px 14px;border:2px solid var(--verde);border-radius:12px;font-weight:700;font-size:1.05rem;line-height:1.2;text-align:center;text-decoration:none}
+.btn.cheio{background:var(--verde);color:#fff}
+.btn.cheio:hover{background:var(--verde-2);border-color:var(--verde-2)}
+.btn.vazado{background:#fff;color:var(--verde)}
+.btn.vazado:hover{background:#eef7f1}
+.monte{padding-top:16px;color:var(--texto-2)}
+.monte a{font-weight:700}
 
-.form{border:2px solid var(--navy);border-radius:16px;padding:18px 16px 20px}
-.form h3{font-size:1.25rem;font-weight:900;letter-spacing:-.02em;line-height:1.15}
-.form .sub{font-size:.95rem;color:var(--tinta-2);margin-top:4px}
-.passos-barra{display:flex;gap:8px;margin:14px 0 4px;font-size:.86rem;font-weight:700;color:var(--tinta-2)}
-.passos-barra li{flex:1;padding:8px 10px;border-radius:999px;background:#eef1f7;text-align:center}
-.passos-barra li.ativo{background:var(--navy);color:#fff}
-.passos-barra li.feito{background:var(--ouro-claro);color:var(--navy)}
-fieldset{border:0;margin:0;padding:0;min-width:0}
-legend{padding:0;font-weight:800;font-size:1.05rem;margin:14px 0 2px}
-.campo{margin-top:14px}
-.campo>label,.rotulo{display:block;font-weight:700;font-size:1rem;margin-bottom:6px}
-.obrigatorio{color:var(--erro)}
-input[type=text],input[type=tel],input[type=number],input[type=date],select{display:block;width:100%;min-height:54px;padding:0 14px;border:2px solid var(--linha);border-radius:12px;background:#fff;font-size:1.05rem}
-input:focus,select:focus{outline:0;border-color:var(--navy);box-shadow:0 0 0 3px rgba(13,27,64,.18)}
-.campo-invalido{border-color:var(--erro)!important}
-.campo-ajuda{font-size:.9rem;color:var(--tinta-2);margin-top:6px}
-.campo-erro{display:none;font-size:.9rem;font-weight:700;color:var(--erro);margin-top:6px}
-.campo-erro.mostrar{display:block}
-.campo-dupla{display:grid;grid-template-columns:1fr 1fr;gap:12px}
-.campo-honeypot{position:absolute;left:-9999px;width:1px;height:1px;overflow:hidden}
-.link-ajuda{background:none;border:0;padding:10px 0 4px;font-weight:700;font-size:.95rem;text-decoration:underline;text-underline-offset:3px;cursor:pointer;color:var(--navy)}
-.link-discreto{font-weight:500;color:var(--tinta-2)}
-.busca-cep{background:#f4f6fb;border-radius:12px;padding:4px 14px 12px;margin-top:8px}
-.lista-ruas{margin-top:8px;display:grid;gap:6px}
-.rua-opcao{padding:12px;border:2px solid var(--linha);border-radius:10px;background:#fff;cursor:pointer}
-.rua-opcao strong{display:block}
-.rua-opcao span{font-size:.9rem;color:var(--tinta-2)}
-.aviso-regiao{margin-top:14px;padding:12px 14px;border-radius:12px;font-weight:700;line-height:1.35}
-.aviso-regiao.ok{background:#e2f5e9;color:var(--ok)}
-.aviso-regiao.fora{background:var(--ouro-claro);color:var(--navy);font-weight:600}
-.form .btn{width:100%;margin-top:18px}
-.btn-secundario{background:#fff;color:var(--navy);border:2px solid var(--navy)}
-.acoes-etapa{display:grid;grid-template-columns:auto 1fr;gap:10px}
-.nota-privacidade,.cadastro-ajuda-texto{font-size:.9rem;color:var(--tinta-2);margin-top:12px}
-.opcoes-cesta,.opcoes-radio{display:grid;gap:8px}
-.opcao-cesta,.opcao-radio,.opcao-checkbox{display:flex;align-items:flex-start;gap:12px;padding:14px;border:2px solid var(--linha);border-radius:12px;cursor:pointer;font-weight:600}
-.opcao-checkbox{border:0;padding:10px 0 0;font-weight:500;font-size:.95rem}
-.opcao-cesta input,.opcao-radio input,.opcao-checkbox input{flex:none;width:22px;height:22px;margin:2px 0 0;accent-color:var(--navy)}
-.opcao-cesta span{display:grid}
-.opcao-cesta em{font-style:normal;font-weight:900;font-size:1.15rem}
-.opcao-cesta small{font-weight:500;color:var(--tinta-2);font-size:.9rem}
-.opcao-cesta:has(input:checked),.opcao-radio:has(input:checked){border-color:var(--navy);background:var(--ouro-claro)}
-.campo-tempo{grid-template-columns:1fr 1fr}
-.cadastro-status{margin-top:12px;font-weight:700}
-.cadastro-status.status-erro{color:var(--erro)}
-.alternativa{margin-top:14px;font-size:.95rem;color:var(--tinta-2)}
+.faixa{margin-top:32px;padding-top:28px;padding-bottom:30px;background:var(--fundo-2);border-top:1px solid var(--linha);border-bottom:1px solid var(--linha)}
+.bloco{padding-top:30px;padding-bottom:4px}
+.faixa h2,.bloco h2{font-size:1.4rem;font-weight:800}
+.passos,.confianca{display:grid;gap:12px;margin-top:16px}
+.passos li,.confianca li{display:flex;align-items:flex-start;gap:14px;padding:14px;border:1px solid var(--linha);border-radius:14px;background:#fff}
+.bola{display:grid;place-items:center;flex:none;width:44px;height:44px;border-radius:50%;background:var(--ouro);color:var(--marinho)}
+.confianca .bola{background:var(--ouro-claro)}
+.bola svg{width:24px;height:24px;fill:none;stroke:currentColor;stroke-width:2;stroke-linecap:round;stroke-linejoin:round}
+.passos b,.confianca b{display:block;color:var(--marinho);font-size:1.05rem;line-height:1.25}
+.passos span,.confianca span{display:block;margin-top:2px;color:var(--texto-2);font-size:.97rem;line-height:1.35}
+.cidades-resumo{margin-top:8px;color:var(--texto-2)}
+.cidades{columns:2;column-gap:18px;margin-top:6px;padding-top:10px;border-top:1px solid var(--linha)}
+.cidades li{break-inside:avoid;padding:3px 0}
+.distritos{margin-top:10px;color:var(--texto-2);font-size:.97rem}
 
-/* o que vem em cada cesta: faixa azul, como os encartes da Aliança */
-.faixa{background:var(--navy);color:#fff;padding:36px 0;margin-top:34px}
-.faixa .sub{color:rgba(255,255,255,.78);margin-top:6px}
-.cestas{display:grid;gap:26px;margin-top:20px}
-.cesta img{border-radius:10px;width:100%;background:var(--navy-2)}
-.cesta h3{font-size:1.25rem;font-weight:900;margin-top:12px;letter-spacing:-.02em}
-.cesta h3 b{color:var(--ouro)}
-.cesta details{margin-top:8px}
-.cesta summary{cursor:pointer;font-weight:700;padding:10px 0;text-decoration:underline;text-underline-offset:3px}
-.cesta details ul{columns:2;column-gap:18px;font-size:.95rem;line-height:1.35;padding-top:4px}
-.cesta details li{break-inside:avoid;padding:3px 0}
-.cesta details li b{color:var(--ouro);font-weight:800}
-.faixa .nota{margin-top:18px;font-size:.95rem;color:rgba(255,255,255,.78)}
-.faixa a{color:#fff;font-weight:700}
-
-/* seções claras */
-.claro{padding-top:34px}
-.passos{counter-reset:p;display:grid;gap:14px;margin-top:16px}
-.passos li{counter-increment:p;display:grid;grid-template-columns:44px 1fr;gap:12px;align-items:start}
-.passos li::before{content:counter(p);width:44px;height:44px;border-radius:50%;background:var(--ouro);display:grid;place-items:center;font-weight:900;font-size:1.25rem}
-.passos b{display:block;font-size:1.08rem}
-.passos span{color:var(--tinta-2)}
-details.linha{border-top:2px solid var(--linha)}
-details.linha:last-of-type{border-bottom:2px solid var(--linha)}
-details.linha>summary{cursor:pointer;font-weight:800;padding:16px 28px 16px 0;position:relative;list-style:none}
-details.linha>summary::-webkit-details-marker{display:none}
-details.linha>summary::after{content:"+";position:absolute;right:4px;top:12px;font-size:1.5rem;font-weight:500}
-details.linha[open]>summary::after{content:"–"}
-details.linha>p,details.linha>ul{padding:0 0 16px;color:var(--tinta-2)}
-.lista-linhas{margin-top:14px}
-.cidades{display:flex;flex-wrap:wrap;gap:6px 8px}
-.cidades li{padding:6px 12px;border-radius:999px;background:#eef1f7;font-size:.95rem;color:var(--tinta)}
-.numeros{display:grid;grid-template-columns:1fr 1fr;gap:14px 18px;margin-top:16px}
-.numeros b{display:block;font-size:1.35rem;font-weight:900;letter-spacing:-.02em;line-height:1.1}
-.numeros span{font-size:.95rem;color:var(--tinta-2)}
-
-.rodape{margin-top:38px;background:#f4f6fb;padding:28px 0 96px;font-size:1rem}
-.rodape h2{font-size:1.25rem;font-weight:900}
+.rodape{margin-top:32px;padding-top:26px;padding-bottom:96px;background:var(--fundo-2);border-top:1px solid var(--linha)}
+.rodape h2{font-size:1.2rem;font-weight:800}
 .contatos{display:grid;gap:10px;margin-top:12px}
-.contatos a{font-weight:800;text-decoration:none}
-.contatos span{display:block;font-weight:500;font-size:.9rem;color:var(--tinta-2)}
-.rodape nav{display:flex;flex-wrap:wrap;gap:8px 20px;margin-top:18px}
-.rodape .fim{margin-top:18px;font-size:.9rem;color:var(--tinta-2)}
+.contatos a{display:flex;align-items:center;gap:10px;min-height:52px;padding:10px 14px;border:1px solid var(--linha);border-radius:12px;background:#fff;color:var(--marinho);font-weight:700;text-decoration:none}
+.contatos .icone{color:var(--verde)}
+.outras{display:flex;flex-wrap:wrap;gap:6px 18px;margin-top:16px}
+.outras a{display:inline-flex;align-items:center;min-height:44px;font-weight:600}
+.fim{margin-top:12px;color:var(--texto-2);font-size:.9rem}
 
-/* barra fixa do celular: WhatsApp sempre a 1 toque (some enquanto a pessoa digita) */
-.barra{position:fixed;left:0;right:0;bottom:0;z-index:20;padding:10px 14px calc(10px + env(safe-area-inset-bottom,0px));background:rgba(255,255,255,.96);border-top:1px solid var(--linha)}
-.barra a{display:flex;align-items:center;justify-content:center;gap:10px;min-height:54px;border-radius:14px;background:var(--verde);color:#fff;font-weight:900;font-size:1.1rem;text-decoration:none}
-body:has(.form :focus) .barra,body:has(.modal-veu:not([hidden])) .barra,body.zap-a-vista .barra{display:none}
+.flutua{position:fixed;right:14px;bottom:calc(14px + env(safe-area-inset-bottom,0px));z-index:20;display:grid;place-items:center;width:54px;height:54px;border-radius:50%;background:var(--verde);color:#fff;box-shadow:0 4px 14px rgba(13,27,64,.28)}
+.flutua .icone{width:29px;height:29px}
 
-.modal-veu{position:fixed;inset:0;z-index:30;display:grid;place-items:center;padding:18px;background:rgba(13,27,64,.6)}
-.modal-caixa{background:#fff;border-radius:18px;padding:26px 22px;max-width:380px;text-align:center}
-.modal-icone{width:60px;height:60px;border-radius:50%;background:var(--verde);color:#fff;font-size:2rem;display:grid;place-items:center;margin:0 auto 12px}
-.modal-caixa h2{font-size:1.4rem;font-weight:900}
-.modal-caixa p{margin-top:8px;color:var(--tinta-2)}
-.modal-caixa .btn{width:100%;margin-top:18px}
-
-@media (min-width:820px){
-  body{font-size:18px}
-  .cartazes{grid-template-columns:1fr 1fr;gap:26px}
-  .duas{grid-template-columns:minmax(0,5fr) minmax(0,6fr);gap:40px;align-items:start}
-  .cestas{grid-template-columns:1fr 1fr;gap:40px}
-  .numeros{grid-template-columns:repeat(4,1fr)}
-  .barra{display:none}
-  .rodape{padding-bottom:36px}
-  .preco .num{font-size:8.6rem}
+@media (min-width:760px){
+  .dentro{padding-left:24px;padding-right:24px}
+  .abre{padding-top:34px}
+  .cestas{grid-template-columns:1fr 1fr;gap:28px;padding-top:24px}
+  .passos,.confianca{grid-template-columns:repeat(3,1fr);gap:16px}
+  .cidades{columns:4}
+  .contatos{grid-template-columns:repeat(2,minmax(0,320px))}
+  .faixa{margin-top:44px;padding-top:36px;padding-bottom:40px}
+  .bloco{padding-top:40px}
 }
-@media (prefers-reduced-motion:reduce){html{scroll-behavior:auto}}
 </style>
 </head>
 <body>
 
-<header class="dentro topo">
-  <a class="marca" href="index.html" aria-label="Cesta Básica Aliança, início">
-    <svg width="38" height="26" viewBox="0 0 38 26" aria-hidden="true"><circle cx="13" cy="13" r="9.5" fill="none" stroke="#f2b705" stroke-width="3.5"/><circle cx="25" cy="13" r="9.5" fill="none" stroke="#c99a04" stroke-width="3.5"/></svg>
-    Cesta Básica Aliança
-  </a>
-  <small>desde 2004</small>
+<svg width="0" height="0" style="position:absolute" aria-hidden="true" focusable="false">
+  <symbol id="zap" viewBox="0 0 24 24"><path fill="currentColor" d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 0 1-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 0 1-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 0 1 2.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0 0 12.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 0 0 5.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 0 0-3.48-8.413z"/></symbol>
+</svg>
+
+<header class="topo">
+  <div class="dentro topo-dentro">
+    <a class="marca" href="./" aria-label="Cesta Básica Aliança, página inicial">
+      <svg viewBox="0 0 42 42" aria-hidden="true"><rect width="42" height="42" rx="10" fill="#0d1b40"/><circle cx="16.5" cy="21" r="8" fill="none" stroke="#f2b705" stroke-width="3.2"/><circle cx="25.5" cy="21" r="8" fill="none" stroke="#f2b705" stroke-width="3.2"/></svg>
+      <span>Cesta Básica<br>Aliança</span>
+    </a>
+    <a class="btn-topo" data-zap="geral" href="https://wa.me/5543999937211?text=Ol%C3%A1!%20Vim%20pelo%20site%20e%20quero%20atendimento." target="_blank" rel="noopener"><svg class="icone" aria-hidden="true"><use href="#zap"/></svg>WhatsApp</a>
+  </div>
 </header>
 
 <main>
-  <section class="dentro abertura" id="cestas">
-    <h1>Cesta básica na sua porta, em 2 vezes.</h1>
-    <p>Londrina e região. Você recebe em casa e paga em 30 e 60 dias.</p>
-
-    <div class="cartazes">
-      <article class="cartaz" data-cartaz="padrao">
-        <span class="selo">Entrega grátis</span>
-        <h2>Cesta Padrão</h2>
-        <p class="itens">Mais de 50 itens</p>
-        <p class="preco"><span class="so-leitor">2 vezes de 265 reais</span><span class="vezes" aria-hidden="true">2x de</span><span class="rs" aria-hidden="true">R$</span><span class="num" aria-hidden="true">265</span></p>
-        <p class="miudo">Total de R$ 530. Entrega grátis na sua porta.</p>
-        <button type="button" class="btn" data-quero="padrao">Quero a Cesta Padrão</button>
-      </article>
-      <article class="cartaz" data-cartaz="grande">
-        <span class="selo">Entrega grátis</span>
-        <h2>Cesta Grande</h2>
-        <p class="itens">Mais de 60 itens, com ovos e frango</p>
-        <p class="preco"><span class="so-leitor">2 vezes de 320 reais</span><span class="vezes" aria-hidden="true">2x de</span><span class="rs" aria-hidden="true">R$</span><span class="num" aria-hidden="true">320</span></p>
-        <p class="miudo">Total de R$ 640. Entrega grátis na sua porta.</p>
-        <button type="button" class="btn" data-quero="grande">Quero a Cesta Grande</button>
-      </article>
-    </div>
+  <section class="dentro abre">
+    <h1>Cesta básica entregue na sua porta</h1>
+    <p>Londrina e região, desde 2004. Escolha a cesta e peça pelo WhatsApp.</p>
   </section>
 
-  <section class="dentro pedir" id="pedir">
-    <h2 id="pedir-titulo">Peça agora</h2>
-    <div class="duas">
-      <div>
-        <a class="btn-zap" data-zap href="https://wa.me/5543999937211?text=Ol%C3%A1!%20Quero%20pedir%20uma%20cesta%20b%C3%A1sica." target="_blank" rel="noopener">
-          <svg width="34" height="34" viewBox="0 0 32 32" aria-hidden="true"><path fill="currentColor" d="M16 3C8.8 3 3 8.7 3 15.8c0 2.5.7 4.9 2 7L3 29l6.5-1.9c2 1.1 4.2 1.7 6.5 1.7 7.2 0 13-5.7 13-12.9S23.2 3 16 3zm0 23.4c-2.1 0-4.1-.6-5.9-1.7l-.4-.3-3.8 1.1 1.1-3.7-.3-.4c-1.1-1.7-1.7-3.7-1.7-5.7C5 10 9.9 5.2 16 5.2S27 10 27 15.8 22.1 26.4 16 26.4zm6-7.8c-.3-.2-1.9-.9-2.2-1-.3-.1-.5-.2-.7.2l-1 1.2c-.2.2-.4.2-.7.1-1.8-.9-3.3-2.1-4.3-3.7-.3-.6.3-.5.9-1.7.1-.2 0-.4 0-.6l-1-2.4c-.3-.6-.5-.5-.7-.5h-.6c-.2 0-.6.1-.9.4-.3.3-1.2 1.2-1.2 2.8s1.2 3.3 1.4 3.5c.2.2 2.4 3.6 5.8 5.1 2.1.9 2.9 1 3.9.8.6-.1 1.9-.8 2.2-1.5.3-.7.3-1.4.2-1.5-.1-.2-.3-.2-.6-.4z"/></svg>
-          <span>Pedir pelo WhatsApp em 1 toque</span>
-        </a>
-        <p class="zap-nota">A conversa abre com o seu pedido já escrito. É só enviar.</p>
-        <ul class="zap-lista">
-          <li>Entrega grátis na sua porta</li>
-          <li>Paga em 2 vezes: 30 e 60 dias</li>
-          <li>Empresa de família, desde 2004</li>
-        </ul>
-      </div>
+  <section class="dentro" id="cestas" aria-label="Nossas cestas">
+    <div class="cestas">
 
-      <form id="form-rapido" class="form" novalidate autocomplete="on">
-        <h3>Ou peça pelo site</h3>
-        <p class="sub">Dois passos. Depois a gente chama você no WhatsApp.</p>
-        <ol class="passos-barra" aria-label="Etapas">
-          <li id="barra-1" class="ativo" aria-current="step">1. Contato</li>
-          <li id="barra-2">2. Crediário</li>
-        </ol>
-
-        <div class="campo campo-honeypot" aria-hidden="true">
-          <label for="informacao_extra">Não preencha este campo</label>
-          <input type="text" id="informacao_extra" name="informacao_extra" tabindex="-1" autocomplete="off">
+      <article class="cesta" id="cesta-padrao">
+        <div class="foto">
+          <img src="imagens/cesta-padrao-itens.jpg" width="640" height="480" decoding="async" fetchpriority="high" alt="Produtos da Cesta Padrão: arroz, feijão, óleo, café, açúcar, macarrão, papel higiênico e produtos de limpeza">
         </div>
-
-        <!-- PASSO 1: consulta de entrega pelo CEP + contato (mesmos campos e nomes do cadastro rápido) -->
-        <fieldset class="etapa" id="etapa-1">
-          <legend>Entregamos na sua rua?</legend>
-          <div class="campo">
-            <label for="cep">Digite o seu CEP <span class="obrigatorio">*</span></label>
-            <input type="text" id="cep" name="cep" inputmode="numeric" autocomplete="postal-code" placeholder="00000-000" required>
-            <p class="campo-ajuda" id="ajuda-cep">A gente confere na hora se a sua rua tem rota.</p>
-            <p class="campo-erro" id="erro-cep" role="alert"></p>
-            <button type="button" class="link-ajuda" id="btn-sem-cep" aria-expanded="false" aria-controls="busca-cep">Não sei meu CEP</button>
-          </div>
-          <div class="busca-cep" id="busca-cep" hidden>
-            <p class="campo-ajuda">Sem problema. Escolha a cidade e digite o nome da rua.</p>
-            <div class="campo">
-              <label for="buscaCidade">Cidade <span class="obrigatorio">*</span></label>
-              <select id="buscaCidade" name="buscaCidade">
-                <option value="">Selecione a cidade</option>
-                <option>Londrina</option><option>Cambé</option><option>Rolândia</option><option>Jaguapitã</option><option>Ibiporã</option><option>Apucarana</option><option>Arapongas</option><option>Bela Vista do Paraíso</option><option>Sertanópolis</option><option>Florestópolis</option><option>Alvorada do Sul</option><option>Primeiro de Maio</option><option>Porecatu</option><option>Marilândia do Sul</option><option>Tamarana</option><option>São Martinho</option><option>Jataizinho</option><option>Prado Ferreira</option><option>Centenário do Sul</option><option>Guaraci</option><option>Bentópolis</option><option>Califórnia</option>
-                <option value="__outra__">Outra cidade</option>
-              </select>
-            </div>
-            <div class="campo" id="campo-busca-rua" hidden>
-              <label for="buscaRua">Nome da rua <span class="obrigatorio">*</span></label>
-              <input type="text" id="buscaRua" name="buscaRua" autocomplete="off" maxlength="90" placeholder="Ex.: Rua Pernambuco">
-              <p class="campo-ajuda" id="ajuda-busca-rua" role="status"></p>
-              <ul class="lista-ruas" id="lista-ruas" role="listbox" aria-label="Ruas encontradas"></ul>
-            </div>
-            <button type="button" class="link-ajuda link-discreto" id="btn-rua-manual">Minha rua não aparece ou moro na área rural</button>
-          </div>
-          <div class="cep-resultado" id="cep-resultado" hidden>
-            <div class="campo">
-              <label for="rua" id="rotulo-rua">Rua <span class="obrigatorio">*</span></label>
-              <input type="text" id="rua" name="rua" autocomplete="address-line1" maxlength="90">
-            </div>
-            <div class="campo-dupla">
-              <div class="campo">
-                <label for="bairro">Bairro <span class="obrigatorio">*</span></label>
-                <input type="text" id="bairro" name="bairro" maxlength="70">
-              </div>
-              <div class="campo">
-                <label for="cidade">Cidade <span class="obrigatorio">*</span></label>
-                <input type="text" id="cidade" name="cidade" autocomplete="address-level2" maxlength="60">
-              </div>
-            </div>
-            <input type="hidden" id="uf" name="uf" value="PR">
-          </div>
-          <div class="aviso-regiao" id="aviso-regiao" role="status" hidden></div>
-          <div class="campo">
-            <label for="nome">Seu nome completo <span class="obrigatorio">*</span></label>
-            <input type="text" id="nome" name="nome" autocomplete="name" required maxlength="80">
-          </div>
-          <div class="campo">
-            <label for="whatsapp">WhatsApp com DDD <span class="obrigatorio">*</span></label>
-            <input type="tel" id="whatsapp" name="whatsapp" inputmode="numeric" autocomplete="tel-national" placeholder="(43) 99999-9999" required>
-            <p class="campo-erro" id="erro-whatsapp" role="alert"></p>
-          </div>
-          <button type="button" class="btn" id="btn-continuar">Continuar</button>
-          <p class="nota-privacidade">Seus dados ficam só com a Cesta Básica Aliança e servem para analisar o cadastro e falar com você.</p>
-        </fieldset>
-
-        <!-- PASSO 2: dados reais do crediário (igual ao cadastro rápido: nenhum valor é estimado) -->
-        <fieldset class="etapa" id="etapa-2" hidden>
-          <legend>Dados do crediário</legend>
-          <p class="cadastro-ajuda-texto">Informe os valores <strong>reais</strong> do seu dia a dia. Se não souber de cabeça, olhe a conta ou o contracheque.</p>
-          <div class="campo-dupla">
-            <div class="campo">
-              <label for="numero">Número da casa <span class="obrigatorio">*</span></label>
-              <input type="text" id="numero" name="numero" autocomplete="address-line2" maxlength="10" placeholder="S/N se não tiver" required>
-            </div>
-            <div class="campo">
-              <label for="complemento">Complemento</label>
-              <input type="text" id="complemento" name="complemento" maxlength="40">
-            </div>
-          </div>
-          <div class="campo">
-            <label for="cpf">CPF <span class="obrigatorio">*</span></label>
-            <input type="text" id="cpf" name="cpf" inputmode="numeric" placeholder="000.000.000-00" required>
-            <p class="campo-erro" id="erro-cpf" role="alert"></p>
-          </div>
-          <div class="campo">
-            <label for="nascimento">Data de nascimento</label>
-            <input type="date" id="nascimento" name="nascimento" autocomplete="bday">
-          </div>
-          <div class="campo">
-            <span class="rotulo">Qual cesta você quer? <span class="obrigatorio">*</span></span>
-            <div class="opcoes-cesta">
-              <label class="opcao-cesta"><input type="radio" name="cesta" value="padrao" required><span><strong>Cesta Padrão</strong><em>2x de R$ 265</em><small>Total de R$ 530, em 30 e 60 dias</small></span></label>
-              <label class="opcao-cesta"><input type="radio" name="cesta" value="grande"><span><strong>Cesta Grande</strong><em>2x de R$ 320</em><small>Total de R$ 640, em 30 e 60 dias</small></span></label>
-            </div>
-          </div>
-          <div class="campo">
-            <span class="rotulo">Qual é a sua fonte de renda? <span class="obrigatorio">*</span></span>
-            <div class="opcoes-radio">
-              <label class="opcao-radio"><input type="radio" name="vinculo" value="inss" required><span>Aposentado(a) ou pensionista (INSS)</span></label>
-              <label class="opcao-radio"><input type="radio" name="vinculo" value="clt"><span>Carteira assinada (CLT)</span></label>
-              <label class="opcao-radio"><input type="radio" name="vinculo" value="autonomo"><span>Autônomo(a)</span></label>
-            </div>
-          </div>
-          <div class="campo" id="campo-registro" hidden>
-            <label for="registroMeses">Há quantos meses você está nesse emprego? <span class="obrigatorio">*</span></label>
-            <input type="number" id="registroMeses" name="registroMeses" min="0" max="600" step="1" inputmode="numeric" placeholder="Ex.: 18">
-          </div>
-          <div class="campo">
-            <label for="profissao">Profissão <span class="obrigatorio">*</span></label>
-            <input type="text" id="profissao" name="profissao" maxlength="60" placeholder="Ex.: aposentada, auxiliar de limpeza, pedreiro" required>
-          </div>
-          <div class="campo">
-            <label for="renda">Renda mensal comprovada (R$) <span class="obrigatorio">*</span></label>
-            <input type="text" id="renda" name="renda" inputmode="numeric" placeholder="R$ 0,00" required>
-            <label class="opcao-checkbox"><input type="checkbox" id="rendaComprovada" name="rendaComprovada"><span>Tenho comprovante dessa renda (holerite, extrato do INSS ou do banco)</span></label>
-          </div>
-          <div class="campo">
-            <span class="rotulo">Sua moradia <span class="obrigatorio">*</span></span>
-            <div class="opcoes-radio">
-              <label class="opcao-radio"><input type="radio" name="moradia" value="alugada" required><span>Pago aluguel</span></label>
-              <label class="opcao-radio"><input type="radio" name="moradia" value="propria"><span>Casa própria (sem aluguel)</span></label>
-            </div>
-          </div>
-          <div class="campo" id="campo-aluguel" hidden>
-            <label for="aluguelValor">Valor do aluguel por mês (R$) <span class="obrigatorio">*</span></label>
-            <input type="text" id="aluguelValor" name="aluguelValor" inputmode="numeric" placeholder="R$ 0,00">
-          </div>
-          <div class="campo">
-            <label for="aguaLuz">Água e luz: valor médio por mês (R$) <span class="obrigatorio">*</span></label>
-            <input type="text" id="aguaLuz" name="aguaLuz" inputmode="numeric" placeholder="R$ 0,00" required>
-          </div>
-          <div class="campo">
-            <label for="filhos">Filhos ou dependentes que moram com você <span class="obrigatorio">*</span></label>
-            <input type="number" id="filhos" name="filhos" min="0" max="20" step="1" inputmode="numeric" placeholder="0" required>
-          </div>
-          <div class="campo" id="campo-gasto-filhos" hidden>
-            <label for="gastoFilhos">Gasto mensal com eles (R$) <span class="obrigatorio">*</span></label>
-            <input type="text" id="gastoFilhos" name="gastoFilhos" inputmode="numeric" placeholder="R$ 0,00">
-          </div>
-          <div class="campo">
-            <span class="rotulo">Há quanto tempo mora neste endereço? <span class="obrigatorio">*</span></span>
-            <div class="campo-dupla campo-tempo">
-              <input type="number" id="tempoMoradia" name="tempoMoradia" min="0" max="99" step="1" inputmode="numeric" aria-label="Quantidade" required>
-              <select id="tempoUnidade" name="tempoUnidade" aria-label="Unidade de tempo">
-                <option value="meses">meses</option>
-                <option value="anos">anos</option>
-              </select>
-            </div>
-          </div>
-          <label class="opcao-checkbox"><input type="checkbox" id="lgpd" name="lgpd" required><span>Autorizo a Cesta Básica Aliança a usar meus dados para analisar meu cadastro e falar comigo pelo WhatsApp.</span></label>
-          <p class="cadastro-status" id="cadastro-status" role="status"></p>
-          <div class="acoes-etapa">
-            <button type="button" class="btn btn-secundario" id="btn-voltar">Voltar</button>
-            <button type="submit" class="btn" id="btn-enviar">Enviar Cadastro</button>
-          </div>
-        </fieldset>
-        <p class="alternativa">Cadastro sujeito a análise. Prefere o <a href="cadastro-completo.html">formulário completo</a>?</p>
-      </form>
-    </div>
-  </section>
-
-  <section class="faixa" id="itens">
-    <div class="dentro">
-      <h2>O que vem em cada cesta</h2>
-      <p class="sub">Comida, limpeza e higiene para o mês da família.</p>
-      <div class="cestas">
-        <div class="cesta">
-          <img src="imagens/cesta-padrao-itens.jpg" width="640" height="492" loading="lazy" decoding="async" alt="Produtos da Cesta Padrão: arroz, feijão, óleo, café, açúcar, macarrão, papel higiênico e produtos de limpeza">
-          <h3>Cesta Padrão: <b>mais de 50 itens</b></h3>
-          <details>
-            <summary>Ver a lista da Cesta Padrão</summary>
+        <div class="corpo">
+          <div class="titulo"><h2>Cesta Padrão</h2><span class="etiqueta">Mais de 50 itens</span></div>
+          <ul class="principais">
+            <li><b>3</b> pacotes de arroz de 5 kg</li>
+            <li><b>4</b> pacotes de feijão</li>
+            <li><b>4</b> litros de óleo</li>
+            <li><b>2</b> pacotes de café</li>
+            <li><b>1</b> pacote de açúcar de 5 kg</li>
+            <li><b>Higiene:</b> 12 rolos de papel higiênico, 4 sabonetes e pasta de dente</li>
+            <li><b>Limpeza:</b> sabão em pó, detergente, amaciante e água sanitária</li>
+          </ul>
+          <details class="completa">
+            <summary>Ver a lista completa</summary>
             <ul>
               <li><b>3</b> pacotes de 5 kg de arroz</li><li><b>1</b> pacote de 5 kg de açúcar</li><li><b>4</b> pacotes de feijão</li><li><b>4</b> litros de óleo</li><li><b>2</b> pacotes de café</li><li><b>1</b> kg de farinha de trigo</li><li><b>2</b> pacotes de macarrão</li><li><b>2</b> cabeças de alho</li><li><b>2</b> litros de refrigerante</li><li><b>1</b> bolacha recheada</li><li><b>1</b> bolacha rosquinha</li><li><b>2</b> pacotes de suco em pó</li><li><b>1</b> lata de sardinha</li><li><b>1</b> sachê de maionese</li><li><b>2</b> miojos</li><li><b>2</b> sachês de molho de tomate</li><li><b>1</b> pacote de farofa temperada</li><li><b>1</b> litro de vinagre</li><li><b>1</b> lata de leite condensado</li><li><b>1</b> lata de creme de leite</li><li><b>1</b> salsichão grande</li><li><b>12</b> rolos de papel higiênico</li><li><b>2</b> detergentes</li><li><b>2</b> litros de amaciante</li><li><b>1</b> litro de água sanitária</li><li><b>1</b> desinfetante</li><li><b>4</b> sabonetes</li><li><b>1</b> pacote de lã de aço</li><li><b>1</b> esponja</li><li><b>2</b> pedras de sabão em barra</li><li><b>1</b> caixa de sabão em pó</li><li><b>1</b> pasta de dente</li><li><b>1</b> limpador multiuso</li>
             </ul>
           </details>
+          <div class="botoes">
+            <a class="btn cheio" data-zap="pedir" data-cesta="Cesta Padrão" href="https://wa.me/5543999937211?text=Ol%C3%A1!%20Quero%20pedir%20a%20Cesta%20Padr%C3%A3o." target="_blank" rel="noopener"><svg class="icone" aria-hidden="true"><use href="#zap"/></svg>Pedir esta cesta pelo WhatsApp</a>
+            <a class="btn vazado" data-zap="consultar" data-cesta="Cesta Padrão" href="https://wa.me/5543999937211?text=Ol%C3%A1!%20Quero%20consultar%20as%20condi%C3%A7%C3%B5es%20da%20Cesta%20Padr%C3%A3o." target="_blank" rel="noopener"><svg class="icone" aria-hidden="true"><use href="#zap"/></svg>Consultar condições no WhatsApp</a>
+          </div>
         </div>
-        <div class="cesta">
-          <img src="imagens/cesta-grande-itens.jpg" width="640" height="492" loading="lazy" decoding="async" alt="Produtos da Cesta Grande: tudo da Padrão em maior quantidade, mais ovos, frango, margarina e achocolatado">
-          <h3>Cesta Grande: <b>mais de 60 itens</b></h3>
-          <details>
-            <summary>Ver a lista da Cesta Grande</summary>
+      </article>
+
+      <article class="cesta" id="cesta-grande">
+        <div class="foto">
+          <img src="imagens/cesta-grande-itens.jpg" width="640" height="480" loading="lazy" decoding="async" alt="Produtos da Cesta Grande: arroz, feijão, óleo, café, açúcar, ovos, frango, margarina, papel higiênico e produtos de limpeza">
+        </div>
+        <div class="corpo">
+          <div class="titulo"><h2>Cesta Grande</h2><span class="etiqueta">Mais de 60 itens</span></div>
+          <ul class="principais">
+            <li><b>4</b> pacotes de arroz de 5 kg</li>
+            <li><b>4</b> pacotes de feijão</li>
+            <li><b>4</b> litros de óleo</li>
+            <li><b>4</b> pacotes de café</li>
+            <li><b>2</b> pacotes de açúcar de 5 kg</li>
+            <li><b>Também vem:</b> ovos, frango, margarina e achocolatado</li>
+            <li><b>Higiene:</b> 12 rolos de papel higiênico, 4 sabonetes e pasta de dente</li>
+            <li><b>Limpeza:</b> sabão em pó, 4 detergentes, amaciante e água sanitária</li>
+          </ul>
+          <details class="completa">
+            <summary>Ver a lista completa</summary>
             <ul>
               <li><b>4</b> pacotes de 5 kg de arroz</li><li><b>2</b> pacotes de 5 kg de açúcar</li><li><b>4</b> pacotes de feijão</li><li><b>4</b> litros de óleo</li><li><b>4</b> pacotes de café</li><li><b>1</b> kg de farinha de trigo</li><li><b>2</b> pacotes de macarrão</li><li><b>2</b> cabeças de alho</li><li><b>2</b> litros de refrigerante</li><li><b>1</b> achocolatado</li><li><b>1</b> bolacha recheada</li><li><b>1</b> bolacha rosquinha</li><li><b>4</b> pacotes de suco em pó</li><li><b>1</b> lata de sardinha</li><li><b>1</b> lata de milho</li><li><b>1</b> sachê de maionese</li><li><b>2</b> miojos</li><li><b>2</b> sachês de molho de tomate</li><li><b>1</b> pacote de farofa temperada</li><li><b>1</b> litro de vinagre</li><li><b>1</b> lata de leite condensado</li><li><b>1</b> lata de creme de leite</li><li><b>1</b> bandeja de ovos</li><li><b>1</b> pacote de coxa e sobrecoxa</li><li><b>1</b> salsichão grande</li><li><b>1</b> pote de margarina</li><li><b>12</b> rolos de papel higiênico</li><li><b>4</b> detergentes</li><li><b>2</b> litros de amaciante</li><li><b>1</b> litro de água sanitária</li><li><b>1</b> desinfetante</li><li><b>4</b> sabonetes</li><li><b>1</b> pacote de lã de aço</li><li><b>1</b> esponja</li><li><b>2</b> pedras de sabão em barra</li><li><b>1</b> caixa de sabão em pó</li><li><b>1</b> pasta de dente</li><li><b>1</b> limpador multiuso</li>
             </ul>
           </details>
+          <div class="botoes">
+            <a class="btn cheio" data-zap="pedir" data-cesta="Cesta Grande" href="https://wa.me/5543999937211?text=Ol%C3%A1!%20Quero%20pedir%20a%20Cesta%20Grande." target="_blank" rel="noopener"><svg class="icone" aria-hidden="true"><use href="#zap"/></svg>Pedir esta cesta pelo WhatsApp</a>
+            <a class="btn vazado" data-zap="consultar" data-cesta="Cesta Grande" href="https://wa.me/5543999937211?text=Ol%C3%A1!%20Quero%20consultar%20as%20condi%C3%A7%C3%B5es%20da%20Cesta%20Grande." target="_blank" rel="noopener"><svg class="icone" aria-hidden="true"><use href="#zap"/></svg>Consultar condições no WhatsApp</a>
+          </div>
         </div>
-      </div>
-      <p class="nota">Quer trocar algum item? <a href="montar-cesta.html">Monte a sua cesta</a> ou combine com a gente no WhatsApp.</p>
+      </article>
+
+    </div>
+    <p class="monte">Quer trocar algum item? <a href="montar-cesta.html">Monte a sua cesta</a></p>
+  </section>
+
+  <section class="faixa" id="como-funciona">
+    <div class="dentro">
+      <h2>Como funciona a entrega na sua porta</h2>
+      <ol class="passos">
+        <li>
+          <span class="bola" aria-hidden="true"><svg viewBox="0 0 24 24"><path d="M20.5 11.5a8.5 8.5 0 0 1-12.4 7.6L3.5 20.5l1.4-4.4A8.5 8.5 0 1 1 20.5 11.5z"/></svg></span>
+          <div><b>1. Chame no WhatsApp</b><span>Diga qual cesta você quer.</span></div>
+        </li>
+        <li>
+          <span class="bola" aria-hidden="true"><svg viewBox="0 0 24 24"><rect x="5" y="4.5" width="14" height="16.5" rx="2"/><path d="M9 4.5V3h6v1.5"/><path d="m9 13 2.2 2.2L15.2 11"/></svg></span>
+          <div><b>2. Combine com a gente</b><span>Cadastro, condições e dia da entrega.</span></div>
+        </li>
+        <li>
+          <span class="bola" aria-hidden="true"><svg viewBox="0 0 24 24"><path d="M3 11.5 12 4l9 7.5"/><path d="M5.5 9.8V20h13V9.8"/><path d="M10 20v-5.5h4V20"/></svg></span>
+          <div><b>3. Receba em casa</b><span>A cesta chega na sua porta.</span></div>
+        </li>
+      </ol>
     </div>
   </section>
 
-  <section class="dentro claro" id="como-funciona">
-    <h2>Como funciona</h2>
-    <ol class="passos">
-      <li><div><b>Você pede</b><span>Pelo WhatsApp ou pelo formulário aqui do site.</span></div></li>
-      <li><div><b>A gente confere o cadastro</b><span>É rápido. Se precisar de algum comprovante, a gente pede pelo WhatsApp.</span></div></li>
-      <li><div><b>A cesta chega na sua casa</b><span>A entrega é grátis e combinada com você.</span></div></li>
-      <li><div><b>Você paga em 2 vezes</b><span>A primeira parcela em 30 dias e a segunda em 60 dias.</span></div></li>
-    </ol>
+  <section class="dentro bloco" id="sobre">
+    <h2>Uma empresa de família, desde 2004</h2>
+    <ul class="confianca">
+      <li>
+        <span class="bola" aria-hidden="true"><svg viewBox="0 0 24 24"><circle cx="12" cy="8" r="4"/><path d="M4.5 20.5a7.5 7.5 0 0 1 15 0"/></svg></span>
+        <div><b>Atendimento humano e rápido</b><span>Você fala com a nossa equipe pelo WhatsApp.</span></div>
+      </li>
+      <li>
+        <span class="bola" aria-hidden="true"><svg viewBox="0 0 24 24"><path d="M2.5 6.5h11v10h-11z"/><path d="M13.5 9.5h4l3.5 3.5v3.5h-7.5"/><circle cx="7" cy="17.5" r="2"/><circle cx="17" cy="17.5" r="2"/></svg></span>
+        <div><b>Entrega garantida</b><span>Na porta da sua casa, em 22 cidades.</span></div>
+      </li>
+      <li>
+        <span class="bola" aria-hidden="true"><svg viewBox="0 0 24 24"><path d="M12 20.5s-7.5-4.6-7.5-10.2A4.3 4.3 0 0 1 12 7.6a4.3 4.3 0 0 1 7.5 2.7c0 5.6-7.5 10.2-7.5 10.2z"/></svg></span>
+        <div><b>Facilidade para a sua família</b><span>As condições são combinadas com você.</span></div>
+      </li>
+    </ul>
   </section>
 
-  <section class="dentro claro" id="areas">
-    <h2>Onde a gente entrega</h2>
-    <div class="lista-linhas">
-      <details class="linha">
-        <summary>Ver as 22 cidades atendidas</summary>
+  <section class="faixa" id="areas">
+    <div class="dentro">
+      <h2>Onde entregamos</h2>
+      <p class="cidades-resumo">Londrina e mais 21 cidades da região.</p>
+      <details class="completa">
+        <summary>Ver todas as cidades</summary>
         <ul class="cidades">
           <li>Londrina</li><li>Cambé</li><li>Rolândia</li><li>Jaguapitã</li><li>Ibiporã</li><li>Apucarana</li><li>Arapongas</li><li>Bela Vista do Paraíso</li><li>Sertanópolis</li><li>Florestópolis</li><li>Alvorada do Sul</li><li>Primeiro de Maio</li><li>Porecatu</li><li>Marilândia do Sul</li><li>Tamarana</li><li>São Martinho</li><li>Jataizinho</li><li>Prado Ferreira</li><li>Centenário do Sul</li><li>Guaraci</li><li>Bentópolis</li><li>Califórnia</li>
         </ul>
-      </details>
-      <details class="linha">
-        <summary>Distritos e bairros</summary>
-        <p>Irerê, Guaravera, Maravilha, Paiquerê, Vila Reis, Ibiaci e Espírito Santo. Se o seu não aparece, <a href="#pedir">digite o CEP</a> ou chame a gente no WhatsApp.</p>
+        <p class="distritos">Distritos: Irerê, Guaravera, Maravilha, Paiquerê, Vila Reis, Ibiaci e Espírito Santo.</p>
       </details>
     </div>
-  </section>
-
-  <section class="dentro claro" id="faq">
-    <h2>Dúvidas comuns</h2>
-    <div class="lista-linhas">
-      <details class="linha">
-        <summary>Como eu pago?</summary>
-        <p>Em 2 vezes, por promissória: a primeira parcela vence em 30 dias e a segunda em 60 dias. Cesta Padrão: 2x de R$ 265. Cesta Grande: 2x de R$ 320. Se preferir pagar à vista, no Pix ou no cartão, combine com o atendente.</p>
-      </details>
-      <details class="linha">
-        <summary>A entrega tem custo?</summary>
-        <p>Não. A entrega é grátis e é feita na porta da sua casa.</p>
-      </details>
-      <details class="linha">
-        <summary>Precisa de cadastro?</summary>
-        <p>Sim, para comprar a prazo. É um cadastro simples, sujeito a análise. Você pode fazer pelo WhatsApp ou pelo formulário do site.</p>
-      </details>
-      <details class="linha">
-        <summary>Posso trocar itens da cesta?</summary>
-        <p>Pode. Na página <a href="montar-cesta.html">Monte a sua</a> você escolhe os itens, e o valor final é confirmado com o atendente.</p>
-      </details>
-      <details class="linha">
-        <summary>Vocês atendem a minha rua?</summary>
-        <p><a href="#pedir">Digite o seu CEP</a> e a gente confere na hora. Se a sua região não aparecer, chame no WhatsApp: pode ser que a gente já atenda.</p>
-      </details>
-    </div>
-  </section>
-
-  <section class="dentro claro" id="sobre">
-    <h2>Quem é a Aliança</h2>
-    <p style="margin-top:10px;color:var(--tinta-2);max-width:60ch">Uma empresa de família, na terceira geração: começou com o avô, seguiu com o pai e continua com a mesma família, levando cesta básica de porta em porta em Londrina e região.</p>
-    <ul class="numeros">
-      <li><b>Desde 2004</b><span>mais de 20 anos de estrada</span></li>
-      <li><b>+23 mil</b><span>clientes cadastrados na nossa história</span></li>
-      <li><b>20+ cidades</b><span>e distritos com rota ativa</span></li>
-      <li><b>3 gerações</b><span>da mesma família</span></li>
-    </ul>
   </section>
 </main>
 
@@ -499,59 +247,36 @@ body:has(.form :focus) .barra,body:has(.modal-veu:not([hidden])) .barra,body.zap
   <div class="dentro">
     <h2>Fale com a gente</h2>
     <div class="contatos">
-      <a data-zap href="https://wa.me/5543999937211?text=Ol%C3%A1!%20Quero%20pedir%20uma%20cesta%20b%C3%A1sica." target="_blank" rel="noopener">WhatsApp (43) 99993-7211<span>toque para abrir a conversa</span></a>
-      <a href="tel:+554333420910">Telefone fixo (43) 3342-0910<span>toque para ligar</span></a>
+      <a data-zap="geral" href="https://wa.me/5543999937211?text=Ol%C3%A1!%20Vim%20pelo%20site%20e%20quero%20atendimento." target="_blank" rel="noopener"><svg class="icone" aria-hidden="true"><use href="#zap"/></svg>WhatsApp (43) 99993-7211</a>
+      <a href="tel:+554333420910"><svg class="icone" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M6.5 3.5h3l1.5 4-2 1.3a12 12 0 0 0 6.2 6.2l1.3-2 4 1.5v3a2 2 0 0 1-2.2 2A16.5 16.5 0 0 1 4.5 5.700a2 2 0 0 1 2-2.2z"/></svg>Telefone (43) 3342-0910</a>
     </div>
-    <nav aria-label="Outras páginas">
+    <nav class="outras" aria-label="Outras páginas">
+      <a href="cadastro.html">Fazer o cadastro pelo site</a>
       <a href="montar-cesta.html">Monte a sua cesta</a>
-      <a href="cadastro-completo.html">Cadastro completo</a>
     </nav>
-    <p class="fim">&copy; <span id="ano"></span> Cesta Básica Aliança. Desde 2004.</p>
+    <p class="fim">&copy; <span id="ano">2026</span> Cesta Básica Aliança. Desde 2004.</p>
   </div>
 </footer>
 
-<div class="barra">
-  <a data-zap href="https://wa.me/5543999937211?text=Ol%C3%A1!%20Quero%20pedir%20uma%20cesta%20b%C3%A1sica." target="_blank" rel="noopener">Pedir pelo WhatsApp</a>
-</div>
-
-<div id="modal-sucesso" class="modal-veu" hidden>
-  <div class="modal-caixa" role="dialog" aria-modal="true" aria-labelledby="modal-sucesso-titulo">
-    <div class="modal-icone" aria-hidden="true">✓</div>
-    <h2 id="modal-sucesso-titulo">Cadastro recebido!</h2>
-    <p id="modal-sucesso-texto">Você vai receber uma mensagem da gente no WhatsApp para enviar a foto dos comprovantes.</p>
-    <button type="button" class="btn" id="btn-fechar-modal">Fechar</button>
-  </div>
-</div>
+<a class="flutua" data-zap="geral" href="https://wa.me/5543999937211?text=Ol%C3%A1!%20Vim%20pelo%20site%20e%20quero%20atendimento." target="_blank" rel="noopener" aria-label="Atendimento pelo WhatsApp"><svg class="icone" aria-hidden="true"><use href="#zap"/></svg></a>
 
 <script>
-/* Escolha da cesta e o WhatsApp em 1 toque. A mensagem já sai escrita com a cesta escolhida e, se a pessoa veio por um link VIP, com o código de quem indicou. */
+/* Links do WhatsApp: a mensagem já sai escrita com o nome da cesta e, se a pessoa veio por um link de indicação (?ref=), com o código de quem indicou.
+   Sem script os links funcionam do mesmo jeito (só sem o código). */
 (function () {
-  var ZAP = "https://wa.me/5543999937211?text=", NOMES = { padrao: "a Cesta Padrão (2x de R$ 265)", grande: "a Cesta Grande (2x de R$ 320)" }, escolhida = "";
+  var ZAP = "https://wa.me/5543999937211?text=";
   function codigo() { try { var r = (new URLSearchParams(location.search).get("ref") || localStorage.getItem("aliancaRef") || "").trim(); return /^[A-Za-z0-9_-]{1,24}$/.test(r) ? r : ""; } catch (e) { return ""; } }
-  function mensagem() { var c = codigo(); return "Olá! Quero pedir " + (NOMES[escolhida] || "uma cesta básica") + "." + (c ? " Código de indicação: " + c + "." : ""); }
-  function atualizar() {
-    var links = document.querySelectorAll("[data-zap]"), i;
-    for (i = 0; i < links.length; i++) links[i].href = ZAP + encodeURIComponent(mensagem());
-    var cartazes = document.querySelectorAll("[data-cartaz]");
-    for (i = 0; i < cartazes.length; i++) cartazes[i].classList.toggle("escolhida", cartazes[i].getAttribute("data-cartaz") === escolhida);
-    var t = document.getElementById("pedir-titulo"); if (t) t.textContent = escolhida ? "Peça " + (escolhida === "padrao" ? "a Cesta Padrão" : "a Cesta Grande") : "Peça agora";
-    var r = escolhida && document.querySelector('input[name="cesta"][value="' + escolhida + '"]'); if (r) r.checked = true;
+  function mensagem(tipo, cesta) {
+    var t = tipo === "pedir" ? "Olá! Quero pedir a " + cesta + "." : tipo === "consultar" ? "Olá! Quero consultar as condições da " + cesta + "." : "Olá! Vim pelo site e quero atendimento.";
+    var c = codigo(); return t + (c ? " Código de indicação: " + c + "." : "");
   }
-  document.addEventListener("click", function (e) {
-    var b = e.target.closest && e.target.closest("[data-quero]"); if (!b) return;
-    escolhida = b.getAttribute("data-quero"); atualizar();
-    var alvo = document.getElementById("pedir"); if (alvo) alvo.scrollIntoView({ behavior: "smooth", block: "start" });
-  });
-  try { var c = new URLSearchParams(location.search).get("cesta"); if (c === "padrao" || c === "grande") escolhida = c; } catch (e) { /* sem parâmetro */ }
-  atualizar();
+  var links = document.querySelectorAll("[data-zap]"), i;
+  for (i = 0; i < links.length; i++) links[i].href = ZAP + encodeURIComponent(mensagem(links[i].getAttribute("data-zap"), links[i].getAttribute("data-cesta") || ""));
   document.getElementById("ano").textContent = new Date().getFullYear();
-  /* a barra fixa some enquanto o botão grande do WhatsApp está na tela (não mostra dois botões iguais) */
-  var grande = document.querySelector(".btn-zap");
-  if (grande && "IntersectionObserver" in window) new IntersectionObserver(function (v) { document.body.classList.toggle("zap-a-vista", v[0].isIntersecting); }).observe(grande);
+  /* link antigo com ?cesta=padrao ou ?cesta=grande: leva direto ao cartão daquela cesta */
+  try { var q = new URLSearchParams(location.search).get("cesta"), alvo = (q === "padrao" || q === "grande") && document.getElementById("cesta-" + q); if (alvo) alvo.scrollIntoView(); } catch (e) { /* sem parâmetro */ }
 })();
 </script>
-<script src="config-site.js" defer></script>
 <script src="origem.js" defer></script>
-<script src="cadastro-rapido.js" defer></script>
 </body>
 </html>
